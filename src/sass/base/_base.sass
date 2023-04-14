@@ -1,27 +1,42 @@
-$color-yellow-light: #FFDE00
-$color-yellow-dark: #FFB600
+$color-lightblue: #3D79B0
 
-$color-blue-light: rgba(#70CC4F, .7)
-$color-blue-dark: rgba(#70CC4F, .7)
+$color-blue-light: #31315c
+$color-blue-dark: #272851
 
-$color-green-light: rgba(#70CC4F, .7)
-$color-green-dark: rgba(#267647, .7)
+$color-bright-light: #ffffff
+$color-bright-dark: #EBF1F6
 
-$color-bg: #F2F8FB
+$color-bg-light: #F2F8FB
+$color-bg-dark: #343566
+
+$color-text-bright: #434343
+$color-text-dark: #ffffff
+
+$color-border-light:#129dad
+$color-border-dark: #c7e8eb
+
 
 $color-white: #ffffff
 $color-black: #000000
+
+$shadow-normal: drop-shadow(.2rem .4rem .4rem rgba(0, 0, 0, 0.25))
+$shadow-small: drop-shadow(.1rem .2rem .2rem rgba(0, 0, 0, 0.4))
 
 *, ::after, ::before
     margin: 0
     padding: 0
     box-sizing: border-box
 
+/* Remove outline on the forms and links */
+* :active, :hover, :focus
+    outline: 0
+    outline-offset: 0
+
 html
     font-size: 62.5%
 
 body
-    background-color: $color-bg
+    background-color: $color-bg-light
     color: $color-black
     padding-top: 10rem
 

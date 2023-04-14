@@ -10,127 +10,73 @@
 </head>
 <body>
     <div class="container">
-        <div class="list list_blue">
+        <div class="list">
             <div class="list__header header">
-                <h2 class="header__tittle">List</h2>
-            </div>
-
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
+                <div class="header__form form"> 
+                    <input type="text" class="header__input input" id="case" placeholder="Add Item" required="" />
+                    <button class="header__btn btn btn_pls">+</button>
                 </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
             </div>
 
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
+            <div class="list__block block block_todo">
+
+                <h2 class="block__tittle">to do</h2>
+
+                <div class="block__item item item_todo">
+                    <div class="item__check-text">
+                        <input type="checkbox" class="item__btn btn btn_off">
+                        <p class="item__text text">Pick up mail</p>
+                    </div>
+                    <input type="date" class="item__calendar calendar" value="2023-04-14">
                 </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
-            </div>
 
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
+                <div class="block__item item item_todo">
+                    <div class="item__check-text">
+                        <input type="checkbox" class="item__btn btn btn_off">
+                        <p class="item__text text">Buy cat food</p>
+                    </div>
+                    <input type="date" class="item__calendar calendar">
                 </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
-            </div>
 
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
+                <div class="block__item item item_todo">
+                    <div class="item__check-text">
+                        <input type="checkbox" class="item__btn btn btn_off">
+                        <p class="item__text text">Get gift for grandma</p>
+                    </div>
+                    <input type="date" class="item__calendar calendar">
                 </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
-            </div>
 
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
+                <div class="block__item item item_todo">
+                    <div class="item__check-text">
+                        <input type="checkbox" class="item__btn btn btn_off">
+                        <p class="item__text text">Doctors appointment</p>
+                    </div>
+                    <input type="date" class="item__calendar calendar">
                 </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
-            </div>
-        </div>
-
-        <div class="list list_yellow">
-            <div class="list__header header">
-                <h2 class="header__tittle">List</h2>
             </div>
 
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
+            <div class="list__block block block_complete">
+
+                <h2 class="block__tittle">completed</h2>
+
+                <div class="block__item item item_complete">
+                    <div class="item__check-text">
+                        <input type="checkbox" checked class="item__btn btn btn_on">
+                        <p class="item__text text text_complete"><strike>Renew registration</strike></p>
+                    </div>
+                    <input type="date" class="item__calendar calendar">
                 </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
-            </div>
 
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
+                <div class="block__item item item_complete">
+                    <div class="item__check-text">
+                        <input type="checkbox" checked class="item__btn btn btn_on">
+                        <p class="item__text text text_complete"><strike>HIIT workout</strike></p>
+                    </div>
+                    <input type="date" class="item__calendar calendar">
+
                 </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
             </div>
 
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
-                </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
-            </div>
-
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
-                </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
-            </div>
-
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
-                </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
-            </div>
-        </div>
-
-        <div class="list list_green">
-            <div class="list__header header">
-                <h2 class="header__tittle">List</h2>
-            </div>
-
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
-                </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
-            </div>
-
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
-                </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
-            </div>
-
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
-                </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
-            </div>
-
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
-                </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
-            </div>
-
-            <div class="list__elem elem">
-                <div class="elem__header header">
-                    <h3 class="header__tittle">Same work</h3>
-                </div>
-                <p class="elem__text paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis earum a id excepturi. Corrupti, officia in consequuntur repellendus illo eos qui vero itaque deleniti veniam, amet modi eius nostrum.</p>
-            </div>
         </div>
     </div>
     
