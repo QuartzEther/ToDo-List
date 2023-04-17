@@ -1,0 +1,78 @@
+$btn-width: 11rem
+$btn-height: 5rem
+
+.toggle-switch
+  position: relative
+  width: $btn-width
+  height: $btn-height
+  background-image: linear-gradient(90deg, #161e54 50%, skyblue 50%)
+  background-size: 200% 100%
+  background-position: 100% 100%
+  box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.1) inset
+  padding: 0
+  border-radius: $btn-height/2
+  display: flex
+  align-items: center
+  transition: 0.7s
+
+  input
+    height: 100%
+    width: 100%
+    cursor: pointer
+    position: absolute
+    opacity: 0
+    z-index: 999
+
+
+  .round-button
+    position: relative
+    transform: translateX(-5%)
+    height: 100%
+    aspect-ratio: 1
+    display: grid
+    place-items: center
+    transition: 0.4s
+    transition-timing-function: ease-in-out
+
+    .button-body
+      position: absolute
+      z-index: 0
+      height: 100%
+      aspect-ratio: 1
+      border-radius: 50%
+      background-image: radial-gradient(#ffcc33 30%, #fc9601)
+      box-shadow: 0 0 20px #ffcc33
+
+
+    @for $i from 1 through 3
+      div
+        &:nth-child(#{$i})
+          height: 90%
+          aspect-ratio: 1
+          position: absolute
+          z-index: 1
+          background-image: radial-gradient(transparent 80%, #fc9601)
+          transform: rotateZ($i * 30deg)
+          transition: 0.4s
+
+
+
+
+
+input:checked ~ .round-button
+  transform: translateX(calc(#{$btn-width} - 95%))
+
+  .button-body
+    background-image: radial-gradient(#f4f4f4, #cacaca)
+    box-shadow: 0 0 20px #f4f4f4
+
+
+  @for $i from 1 through 3
+    div
+      &:nth-child(#{$i})
+        height: $i * 6%
+        aspect-ratio: 1
+        transform: rotateZ(90deg) translate($i%2 * (-1em), $i * 0.5em) !important
+        border-radius: 50%
+        background-color: #cacaca
+        transform: rotateZ(180deg)

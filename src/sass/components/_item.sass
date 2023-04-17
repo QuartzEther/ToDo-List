@@ -1,0 +1,32 @@
+.item
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 1.8rem 1.2rem
+  border-radius: 1rem
+
+  *
+    display: inline-block
+
+  &:not(:last-child)
+    margin-bottom: 1rem
+  &:last-child
+    margin-bottom: 2rem
+
+  &__check-text
+    display: flex
+    align-items: center
+  &__btn
+    margin-right: 1rem
+
+  &_todo
+    box-shadow: .1rem .2rem .6rem rgba(0, 0, 0, 0.25)
+
+  &_complete
+    opacity: .7
+
+  &__checkbox
+    margin-right: 1.2rem
+
+.list_dark-mode > .block > .item
+  background-color: $color-item-dark
