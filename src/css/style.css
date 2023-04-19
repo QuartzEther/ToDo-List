@@ -351,12 +351,16 @@ table {
 *, ::after, ::before {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none; }
 
 /* Remove outline on the forms and links */
 * :active, :hover, :focus {
   outline: 0;
-  outline-offset: 0; }
+  outline-offset: 0;
+  cursor: default; }
 
 html {
   font-size: 72.5%; }
@@ -412,7 +416,7 @@ h3 {
 h5 {
   font-family: "Roboto";
   font-weight: 400;
-  font-size: 1.2rem; }
+  font-size: 1.3rem; }
 
 p {
   font-family: "Roboto";
@@ -629,7 +633,7 @@ input:checked ~ .round-button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.8rem 1.2rem;
+  padding: 0.8rem 0.2rem 0.8rem 1.2rem;
   border-radius: 1rem; }
   .item * {
     display: inline-block; }
@@ -655,16 +659,37 @@ input:checked ~ .round-button {
 .calendar {
   position: relative;
   display: flex;
-  align-items: center; }
+  align-items: center;
+  padding: 1rem;
+  opacity: 0.6; }
   .calendar input[type="date"] {
     position: absolute;
-    padding: 1rem;
-    opacity: 0.1; }
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 1; }
+  .calendar input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    color: transparent;
+    background: transparent; }
   .calendar__img {
     width: 2rem;
     height: 2rem;
-    background-color: #7b1818;
-    margin: 0 0.5rem 0 0.8rem; }
+    background: url("../img/calendar_lite.png") center/contain no-repeat;
+    opacity: 0.6;
+    margin-right: 0.5rem; }
+  .calendar:hover {
+    opacity: 0.8; }
+
+.list_dark-mode .calendar__img {
+  background-image: url("../img/calendar_dark.png");
+  opacity: 0.8; }
 
 .padding-0px {
   padding: 0; }

@@ -33,10 +33,15 @@ $shadow-small: drop-shadow(.1rem .2rem .2rem rgba(0, 0, 0, 0.4))
     padding: 0
     box-sizing: border-box
 
+    -moz-user-select: none
+    -khtml-user-select: none
+    user-select: none
+
 /* Remove outline on the forms and links */
 * :active, :hover, :focus
     outline: 0
     outline-offset: 0
+    cursor: default
 
 html
     font-size: 72.5%
