@@ -38,10 +38,12 @@ $shadow-small: drop-shadow(.1rem .2rem .2rem rgba(0, 0, 0, 0.4))
     user-select: none
 
 /* Remove outline on the forms and links */
-* :active, :hover, :focus
-    outline: 0
+* :active, *:hover, *:focus
+    outline: none
     outline-offset: 0
     cursor: default
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
+    -webkit-tap-highlight-color: transparent
 
 html
     font-size: 72.5%

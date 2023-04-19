@@ -395,10 +395,18 @@ table {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+          user-select: none;
+}
+
+/* Remove outline on the forms and links */
+*:focus {
+  outline-color: transparent;
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 72.5%;
 }
 
 body {
@@ -440,7 +448,8 @@ body {
 }
 * {
   font-family: "Roboto";
-  font-weight: 400;
+  font-weight: 300;
+  color: #434343;
 }
 
 h2 {
@@ -457,50 +466,336 @@ h3 {
   font-size: 3rem;
 }
 
+h5 {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 1.3rem;
+}
+
 p {
   font-family: "Roboto";
-  font-style: italic;
-  font-weight: 300;
-  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.8rem;
 }
 
 .list {
-  max-width: 40rem;
+  width: 40rem;
   margin-bottom: 10rem;
-  padding: 3rem;
+  padding: 2.5rem 0 2rem 0;
+  border-radius: 2rem;
   background-color: #ffffff;
+  filter: drop-shadow(0.2rem 0.4rem 0.4rem rgba(0, 0, 0, 0.25));
+}
+.list_dark-mode {
+  background-color: #31315c;
+}
+.list_dark-mode * {
+  color: rgba(244, 244, 244, 0.85);
+}
+.list_dark-mode p {
+  font-weight: 300;
+}
+.list_dark-mode .header {
+  border-bottom: rgba(255, 255, 255, 0.15) solid 1px;
 }
 
-.form {
-  font-family: "Roboto", sans-serif;
-  font-size: 1.8rem;
+.header {
+  margin-bottom: 1.6rem;
+  padding-bottom: 2rem;
+  border-bottom: rgba(0, 0, 0, 0.15) solid 1px;
+  position: relative;
 }
-.form__label {
-  display: block;
-  transition: all 0.3s;
-  transform: translateY(0rem);
-}
-.form__input {
-  color: #333333;
+.header__form {
+  position: relative;
+  width: 90%;
   margin: 0 auto;
-  padding: 1.5rem 2rem;
-  border-radius: 4rem;
+}
+.header__btn {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  right: 3%;
+}
+.header__toggle-switch {
+  transform: scale(0.65);
+  margin-left: auto;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.block {
+  width: 90%;
+  margin: 0 auto;
+}
+.block__tittle {
+  margin-bottom: 1.6rem;
+}
+
+.input {
+  color: #2a2b52;
   background-color: #EBF1F6;
   border: none;
-  width: 90%;
-  display: block;
-  border: 0.3rem solid transparent;
-  transition: all 0.3s;
+  border: 2px solid transparent;
+  border-radius: 3rem;
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 2rem;
+  padding: 0.7rem 1.6rem;
+  width: 100%;
+  transition: 0.3s border-color;
 }
-.form__input:-moz-placeholder-shown + .form__label {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-4rem);
+.input:focus, .input:hover {
+  border-color: #129dad;
 }
-.form__input:placeholder-shown + .form__label {
+
+.list_dark-mode > .header > .form > .input {
+  color: #ffffff;
+  background-color: #272851;
+}
+.list_dark-mode > .header > .form > .input:focus, .list_dark-mode > .header > .form > .input:hover {
+  border-color: #abc6c9;
+}
+
+.btn {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 2rem;
+  font-family: "Roboto";
+  color: #ffffff;
+  background-color: #3D79B0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: 0.3s all;
+}
+.btn:hover {
+  border-color: #1b60a0;
+}
+.btn:active {
+  filter: drop-shadow(0.1rem 0.2rem 0.2rem rgba(0, 0, 0, 0.4));
+}
+
+.checkbox {
+  position: relative;
+  width: 2.4rem;
+}
+.checkbox label {
+  background-color: #fff;
+  border: 1px solid #dfdfdf;
+  cursor: pointer;
+  position: absolute;
+  border-radius: 50%;
+  height: 2.4rem;
+  width: 2.4rem;
+  transform: translateY(-50%);
+  top: 50%;
+  left: 0;
+}
+.checkbox label:after {
+  content: "";
+  position: absolute;
+  border: 2px solid #28804a;
+  border-top: none;
+  border-right: none;
+  height: 0.6rem;
+  width: 1.2rem;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  top: 42%;
+  left: 52%;
   opacity: 0;
+}
+.checkbox input[type=checkbox] {
   visibility: hidden;
-  transform: translateY(-4rem);
+}
+.checkbox input[type=checkbox]:checked + label {
+  background-color: #c7f8bc;
+  border-color: rgb(166, 229, 163);
+}
+.checkbox input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 11rem;
+  height: 5rem;
+  background-image: linear-gradient(90deg, #161e54 50%, skyblue 50%);
+  background-size: 200% 100%;
+  background-position: 100% 100%;
+  box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.1) inset;
+  padding: 0;
+  border-radius: 2.5rem;
+  display: flex;
+  align-items: center;
+  transition: 0.7s;
+}
+.toggle-switch input {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  position: absolute;
+  opacity: 0;
+  z-index: 999;
+}
+.toggle-switch .round-button {
+  position: relative;
+  transform: translateX(-5%);
+  height: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  transition: 0.4s;
+  transition-timing-function: ease-in-out;
+}
+.toggle-switch .round-button .button-body {
+  position: absolute;
+  z-index: 0;
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-image: radial-gradient(#ffcc33 30%, #fc9601);
+  box-shadow: 0 0 20px #ffcc33;
+}
+.toggle-switch .round-button div:nth-child(1) {
+  height: 90%;
+  aspect-ratio: 1;
+  position: absolute;
+  z-index: 1;
+  background-image: radial-gradient(transparent 80%, #fc9601);
+  transform: rotateZ(30deg);
+  transition: 0.4s;
+}
+.toggle-switch .round-button div:nth-child(2) {
+  height: 90%;
+  aspect-ratio: 1;
+  position: absolute;
+  z-index: 1;
+  background-image: radial-gradient(transparent 80%, #fc9601);
+  transform: rotateZ(60deg);
+  transition: 0.4s;
+}
+.toggle-switch .round-button div:nth-child(3) {
+  height: 90%;
+  aspect-ratio: 1;
+  position: absolute;
+  z-index: 1;
+  background-image: radial-gradient(transparent 80%, #fc9601);
+  transform: rotateZ(90deg);
+  transition: 0.4s;
+}
+
+input:checked ~ .round-button {
+  transform: translateX(calc(11rem - 95%));
+}
+input:checked ~ .round-button .button-body {
+  background-image: radial-gradient(#f4f4f4, #cacaca);
+  box-shadow: 0 0 20px #f4f4f4;
+}
+input:checked ~ .round-button div:nth-child(1) {
+  height: 6%;
+  aspect-ratio: 1;
+  transform: rotateZ(90deg) translate(-1em, 0.5em) !important;
+  border-radius: 50%;
+  background-color: #cacaca;
+  transform: rotateZ(180deg);
+}
+input:checked ~ .round-button div:nth-child(2) {
+  height: 12%;
+  aspect-ratio: 1;
+  transform: rotateZ(90deg) translate(0em, 1em) !important;
+  border-radius: 50%;
+  background-color: #cacaca;
+  transform: rotateZ(180deg);
+}
+input:checked ~ .round-button div:nth-child(3) {
+  height: 18%;
+  aspect-ratio: 1;
+  transform: rotateZ(90deg) translate(-1em, 1.5em) !important;
+  border-radius: 50%;
+  background-color: #cacaca;
+  transform: rotateZ(180deg);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 0.2rem 0.8rem 1.2rem;
+  border-radius: 1rem;
+}
+.item * {
+  display: inline-block;
+}
+.item:not(:last-child) {
+  margin-bottom: 1rem;
+}
+.item:last-child {
+  margin-bottom: 2rem;
+}
+.item__check-text {
+  display: flex;
+  align-items: center;
+}
+.item__btn {
+  margin-right: 1rem;
+}
+.item_todo {
+  box-shadow: 0.1rem 0.2rem 0.6rem rgba(0, 0, 0, 0.25);
+}
+.item_complete {
+  opacity: 0.7;
+}
+.item__checkbox {
+  margin-right: 1.2rem;
+}
+
+.list_dark-mode > .block > .item {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.calendar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  opacity: 0.6;
+}
+.calendar input[type=date] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 1;
+}
+.calendar input[type=date]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  color: transparent;
+  background: transparent;
+}
+.calendar__img {
+  width: 2rem;
+  height: 2rem;
+  background: url("../img/calendar_lite.png") center/contain no-repeat;
+  opacity: 0.6;
+  margin-right: 0.5rem;
+}
+.calendar:hover {
+  opacity: 0.8;
+}
+
+.list_dark-mode .calendar__img {
+  background-image: url("../img/calendar_dark.png");
+  opacity: 0.8;
 }
 
 .padding-0px {
