@@ -50,3 +50,5 @@ function dateToInner( calendar, input){
     }
 
 }
+
+export default dateToInner;
