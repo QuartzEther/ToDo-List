@@ -1,9 +1,9 @@
-import dateToInner from './calendar.js'
+import calendarInit from './classes/calendar.js'
 
-//get elements in TODO & complete
+//init items
 let item = null;
 
-let itemList = {
+let itemList = { //объект с эл которые находятся в todo и complete
     todo: [],
     complete : []
 };
@@ -15,6 +15,8 @@ fillItemList('complete', '.block_complete');
 function fillItemList(objKey, blockName){
     for (item of document.querySelector(blockName).querySelectorAll('.item')){
         itemList[objKey].push(item)
+
+        calendarInit(item.querySelector('.calendar'))
     }
 }
 
@@ -47,20 +49,10 @@ headerInput.querySelector('button').addEventListener('click', ()=>{
 
         itemList.todo.push(item);
 
-        const calendar = item.querySelector('.calendar');
-        const input = calendar.querySelector('input');
-
-        //заполнение поля text
-        dateToInner(calendar, input);
-
-        //появление поля выбора
-        calendar.addEventListener('click', ()=>{
-            input.showPicker();
-        })
-
-        //изменение поля text
-        input.addEventListener("change", (event) => dateToInner( calendar, input));
-
-
+        calendarInit(item.querySelector('.calendar'))
     }
 })
+
+//moving item by checker
+
+

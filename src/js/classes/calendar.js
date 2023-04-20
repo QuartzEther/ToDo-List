@@ -1,4 +1,4 @@
-for (let calendar of document.querySelectorAll('.calendar')){
+function calendarInit(calendar){
     const input = calendar.querySelector('input');
 
     //заполнение поля text
@@ -13,7 +13,7 @@ for (let calendar of document.querySelectorAll('.calendar')){
     input.addEventListener("change", (event) => dateToInner( calendar, input));
 }
 
-function dateToInner( calendar, input){
+function dateToInner(calendar, input){
     if (input.value){
 
         input.style.cursor = 'auto'
@@ -51,4 +51,4 @@ function dateToInner( calendar, input){
 
 }
 
-export default dateToInner;
+export default calendarInit;
