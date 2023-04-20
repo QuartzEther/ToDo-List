@@ -1,6 +1,7 @@
 import calendarInit from './classes/calendar.js'
 import {Item} from './classes/item.js'
 
+//-----------------INIT----------------
 
 let itemList = [];
 
@@ -13,16 +14,15 @@ const completeBlock = document.querySelector('.block_complete');
 
 
 for (let item of itemList){
-    console.log(item);
+    if (item.isComplete){
+        completeBlock.insertAdjacentHTML("beforeend", item.createItem(itemList));
+    } else {
+        todoBlock.insertAdjacentHTML("beforeend", item.createItem(itemList));
+    }
 }
 
+for (let item of document.querySelectorAll('.item')){
+    calendarInit(item.querySelector('.calendar'));
+}
 
-
-// function fillItemList(objKey, blockName){
-//     for (item of document.querySelector(blockName).querySelectorAll('.item')){
-//         itemList[objKey].push(item)
-//
-//         calendarInit(item.querySelector('.calendar'))
-//     }
-// }
-
+//-----------------ADD NEW ITEM----------------
