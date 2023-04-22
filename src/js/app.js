@@ -1,58 +1,78 @@
 import calendarInit from './classes/calendar.js'
+import {Item} from './classes/item.js'
 
-//init items
-let item = null;
+//-----------------INIT----------------
 
-let itemList = { //объект с эл которые находятся в todo и complete
-    todo: [],
-    complete : []
-};
+let itemList = [];
 
-fillItemList('todo', '.block_todo');
-fillItemList('complete', '.block_complete');
+const todoBlock = document.querySelector('.block_todo');
+const completeBlock = document.querySelector('.block_complete');
 
+const addBtn = document.querySelector('.header__btn');
 
-function fillItemList(objKey, blockName){
-    for (item of document.querySelector(blockName).querySelectorAll('.item')){
-        itemList[objKey].push(item)
+//--------------------------------------
 
-        calendarInit(item.querySelector('.calendar'))
-    }
-}
+// itemList.push(new Item('text1'));
+// itemList.push(new Item('text2'));
+// itemList.push(new Item('text3', true));
 
-//add item
-let headerInput = document.querySelector('.header__form');
+//create html text
+// for (let id in itemList){
+//     itemList[id].createHTML(id);
+// }
+//
+// //add items in DOM
+// for (let item of itemList){
+//     if (item.isComplete){
+//         completeBlock.insertAdjacentHTML("beforeend", item.itemHtml);
+//     } else {
+//         todoBlock.insertAdjacentHTML("beforeend", item.itemHtml);
+//     }
+// }
+//
+// //calendar & checkbox init
+// for (let item of document.querySelectorAll('.item')){
+//     calendarInit(item.querySelector('.calendar'));
+//     item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
+// }
 
-headerInput.querySelector('button').addEventListener('click', ()=>{
-    let value = headerInput.querySelector('input').value;
+//-----------------ADD NEW ITEM----------------
 
-    if (value){
-        let newElem =
-            `<div class="block__item item item_todo">
-            <div class="item__check-text">
-                <div class="item__checkbox checkbox">
-                    <input type="checkbox" id="checkbox_${itemList.todo.length}" />
-                    <label for="checkbox_${itemList.todo.length}"></label>
-                </div>
-                <p class="item__text text">${value}</p>
-            </div>
-            <div class="item__calendar calendar">
-                <input type="date">
-                <div class="calendar__img"></div>
-                <h5 class="calendar__text"></h5>
-            </div>
-        </div>`;
+let input = document.querySelector('.header__input');
 
-        document.querySelector('.block_todo').insertAdjacentHTML("beforeend", newElem);
+addBtn.addEventListener('click', ()=>{
+    if (input.value){
+        itemList.push(new Item(input.value));
 
-        item = document.querySelector('.block_todo').querySelectorAll('.item')[itemList.todo.length]
+        todoBlock.insertAdjacentHTML("beforeend", itemList[itemList.length-1].createHTML(itemList.length));
 
-        itemList.todo.push(item);
+        let item = todoBlock.querySelectorAll('.item')[todoBlock.querySelectorAll('.item').length - 1]
 
-        calendarInit(item.querySelector('.calendar'))
+        calendarInit(item.querySelector('.calendar'));
+        item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
+        
+        input.value = '';
     }
 })
+//----------------Moving Items-------------------
 
-//moving item by checker
+//move width checkbox
+function checkboxTouch(e){
+    //выборка именно input checkbox т.е один элемент
+    if (e.target.id) {
+        let checkbox = e.target;
+        let item = e.target.parentNode.parentNode.parentElement;
 
+        if (checkbox.checked){
+            item.classList.replace('item_todo', 'item_complete')
+            item.querySelector('.text').innerHTML = `<strike>${item.querySelector('.text').innerHTML}</strike>`
 
+            completeBlock.appendChild(item)
+        } else {
+            item.classList.replace('item_complete','item_todo')
+            item.querySelector('.text').innerHTML = item.querySelector('.text > strike').innerHTML;
+
+            todoBlock.appendChild(item)
+        }
+    }
+}
