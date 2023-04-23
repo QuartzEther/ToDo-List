@@ -12,29 +12,29 @@ const addBtn = document.querySelector('.header__btn');
 
 //--------------------------------------
 
-// itemList.push(new Item('text1'));
-// itemList.push(new Item('text2'));
-// itemList.push(new Item('text3', true));
+itemList.push(new Item('text1'));
+itemList.push(new Item('text2'));
+itemList.push(new Item('text3', true));
 
 //create html text
-// for (let id in itemList){
-//     itemList[id].createHTML(id);
-// }
-//
-// //add items in DOM
-// for (let item of itemList){
-//     if (item.isComplete){
-//         completeBlock.insertAdjacentHTML("beforeend", item.itemHtml);
-//     } else {
-//         todoBlock.insertAdjacentHTML("beforeend", item.itemHtml);
-//     }
-// }
-//
-// //calendar & checkbox init
-// for (let item of document.querySelectorAll('.item')){
-//     calendarInit(item.querySelector('.calendar'));
-//     item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
-// }
+for (let id in itemList){
+    itemList[id].createHTML(id);
+}
+
+//add items in DOM
+for (let item of itemList){
+    if (item.isComplete){
+        completeBlock.insertAdjacentHTML("beforeend", item.itemHtml);
+    } else {
+        todoBlock.insertAdjacentHTML("beforeend", item.itemHtml);
+    }
+}
+
+//calendar & checkbox init
+for (let item of document.querySelectorAll('.item')){
+    calendarInit(item.querySelector('.calendar'));
+    item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
+}
 
 //-----------------ADD NEW ITEM----------------
 
@@ -50,13 +50,23 @@ addBtn.addEventListener('click', ()=>{
 
         calendarInit(item.querySelector('.calendar'));
         item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
+
+        //for start dragging costing opacity
+        item.addEventListener("dragstart", () => {
+            item.classList.add("dragging")
+        })
+
+        //for end the dragging opacity costing
+        item.addEventListener("dragend", () => {
+            item.classList.remove("dragging")
+        })
         
         input.value = '';
     }
 })
 //----------------Moving Items-------------------
 
-//move width checkbox
+//move with checkbox
 function checkboxTouch(e){
     //выборка именно input checkbox т.е один элемент
     if (e.target.id) {
@@ -75,4 +85,50 @@ function checkboxTouch(e){
             todoBlock.appendChild(item)
         }
     }
+}
+
+//move with drug&drop
+const draggbles = document.querySelectorAll(".shallow-draggable")
+const containers = document.querySelectorAll(".draggable-container")
+
+draggbles.forEach((draggble) => {
+    //for start dragging costing opacity
+    draggble.addEventListener("dragstart", () => {
+        draggble.classList.add("dragging")
+    })
+
+    //for end the dragging opacity costing
+    draggble.addEventListener("dragend", () => {
+        draggble.classList.remove("dragging")
+    })
+})
+//shit
+containers.forEach((container) => {
+    container.addEventListener("dragover", function (e) {
+        e.preventDefault()
+        const afterElement = dragAfterElement(container, e.clientY)
+        const dragging = document.querySelector(".dragging")
+        if (afterElement == null) {
+            container.appendChild(dragging)
+        } else {
+            container.insertBefore(dragging, afterElement)
+        }
+    })
+})
+
+function dragAfterElement(container, y) {
+    const draggbleElements = [...container.querySelectorAll(".shallow-draggable:not(.dragging)")]
+
+    return draggbleElements.reduce(
+        (closest, child) => {
+            const box = child.getBoundingClientRect()
+            const offset = y - box.top - box.height / 2
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child }
+            } else {
+                return closest
+            }
+        },
+        { offset: Number.NEGATIVE_INFINITY }
+    ).element
 }
