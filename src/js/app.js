@@ -113,6 +113,24 @@ containers.forEach((container) => {
         } else {
             container.insertBefore(dragging, afterElement)
         }
+
+        if (container.classList.contains('block_complete')){
+            dragging.classList.replace('item_todo', 'item_complete')
+            dragging.querySelector('.checkbox > input').checked = true;
+            
+            let text = dragging.querySelector('.text').innerHTML
+            if(!text.includes('strike')){
+                dragging.querySelector('.text').innerHTML = `<strike>${dragging.querySelector('.text').innerHTML}</strike>`
+            }
+        }else {
+            dragging.classList.replace('item_complete','item_todo')
+            dragging.querySelector('.checkbox > input').checked = false;
+
+            let text = dragging.querySelector('.text').innerHTML;
+            if(text.includes('strike')){
+                dragging.querySelector('.text').innerHTML = dragging.querySelector('.text > strike').innerHTML;
+            }
+        }
     })
 })
 
