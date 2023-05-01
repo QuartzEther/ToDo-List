@@ -18,7 +18,7 @@ export class Item {
     createHTML(numId = null){
         if (!this.#id) this.#id = numId;
         if (this.#id){
-            this.#itemHTML = `<div class="block__item item ${this.isComplete ? 'item_complete' : 'item_todo'} shallow-draggable" draggable="true">
+            this.#itemHTML = `<div class="block__item item ${this.isComplete ? 'item_complete' : 'item_todo'} drag-item">
                 <div class="item__check-text">
                     <div class="item__checkbox checkbox">
                         <input type="checkbox" ${this.isComplete ? 'checked' : ''} id="checkbox_${this.#id}" />

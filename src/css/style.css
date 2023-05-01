@@ -426,6 +426,22 @@ p {
   font-weight: 400;
   font-size: 1.8rem; }
 
+.animation-up {
+  animation: 0.4s upAnimate forwards; }
+
+@keyframes upAnimate {
+  0% {
+    transform: translateY(120%); }
+  100% {
+    transform: translateY(0%); } }
+.animation-down {
+  animation: 0.4s downAnimate forwards; }
+
+@keyframes downAnimate {
+  0% {
+    transform: translateY(-120%); }
+  100% {
+    transform: translateY(0%); } }
 .list {
   width: 40rem;
   margin-bottom: 10rem;

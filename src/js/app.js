@@ -88,65 +88,133 @@ function checkboxTouch(e){
 }
 
 //move with drug&drop
-const draggbles = document.querySelectorAll(".shallow-draggable")
-const containers = document.querySelectorAll(".draggable-container")
+const containers = document.querySelectorAll(".drag-list")
+const items = document.querySelectorAll(".drag-item")
 
-draggbles.forEach((draggble) => {
-    //for start dragging costing opacity
-    draggble.addEventListener("dragstart", () => {
-        draggble.classList.add("dragging")
-    })
+for (let item of items){
 
-    //for end the dragging opacity costing
-    draggble.addEventListener("dragend", () => {
-        draggble.classList.remove("dragging")
-    })
-})
-//shit
-containers.forEach((container) => {
-    container.addEventListener("dragover", function (e) {
-        e.preventDefault()
-        const afterElement = dragAfterElement(container, e.clientY)
-        const dragging = document.querySelector(".dragging")
-        if (afterElement == null) {
-            container.appendChild(dragging)
+    let container = item.parentElement;
+
+    let prevContainer = null;
+    let nextContainer = null;
+
+    if (containers.length > 1){
+        if (container.nextElementSibling && container.nextElementSibling.classList.contains('drag-list')){
+            nextContainer = container.nextElementSibling;
+        }
+        if (container.previousElementSibling && container.previousElementSibling.classList.contains('drag-list')){
+            prevContainer = container.previousElementSibling;
+        }
+    }
+
+    let margin =  item.getBoundingClientRect().y; //закрепление позиции item сверху
+
+    item.addEventListener('touchstart', touchStart);
+    item.addEventListener('mousedown', touchStart)
+
+    function touchStart (event){
+        event.preventDefault();
+
+        margin =  item.getBoundingClientRect().y; //закрепление позиции item сверху
+        item.style.transition = 'none'
+
+        item.style.position = 'relative';
+        item.style.zIndex = 1000;
+
+        if (event.targetTouches){
+            let touch = event.targetTouches[0];
+            item.style.top = touch.clientY - margin - item.offsetHeight / 2 + 'px';
+
+            document.addEventListener('touchmove', touchMove, {passive: false});
+            document.addEventListener('touchend', touchEnd);
         } else {
-            container.insertBefore(dragging, afterElement)
+            item.style.top = event.clientY - margin - item.offsetHeight / 2 + 'px';
+
+            document.addEventListener('mousemove', touchMove);
+            document.addEventListener('mouseup', touchEnd);
         }
+    }
 
-        if (container.classList.contains('block_complete')){
-            dragging.classList.replace('item_todo', 'item_complete')
-            dragging.querySelector('.checkbox > input').checked = true;
-            
-            let text = dragging.querySelector('.text').innerHTML
-            if(!text.includes('strike')){
-                dragging.querySelector('.text').innerHTML = `<strike>${dragging.querySelector('.text').innerHTML}</strike>`
-            }
-        }else {
-            dragging.classList.replace('item_complete','item_todo')
-            dragging.querySelector('.checkbox > input').checked = false;
 
-            let text = dragging.querySelector('.text').innerHTML;
-            if(text.includes('strike')){
-                dragging.querySelector('.text').innerHTML = dragging.querySelector('.text > strike').innerHTML;
-            }
+    function touchMove(event) {
+        event.preventDefault();
+
+        let touch = event.targetTouches? event.targetTouches[0]:event;
+        item.style.top = touch.clientY - margin - item.offsetHeight / 2 + 'px';
+
+        let thisEl = item;
+        let prevEl = thisEl.previousElementSibling;
+        let nextEl = thisEl.nextElementSibling;
+
+        //перемещение item
+
+        //перемещение вниз
+        if (nextEl && item.getBoundingClientRect().y > nextEl.getBoundingClientRect().y
+        && !nextEl.classList.contains('block__tittle')){
+            container.insertBefore(nextEl, thisEl);
+
+            nextEl.classList.add('animation-up');
+            nextEl.addEventListener("animationend", () =>{
+                nextEl.classList.remove('animation-up')
+            }, false);
+
+            item.style.top = 0;
+            margin = item.getBoundingClientRect().y;
+
+
+        } else if (prevEl && item.getBoundingClientRect().y < prevEl.getBoundingClientRect().y
+        && !prevEl.classList.contains('block__tittle')){ //вверх
+            container.insertBefore(thisEl, prevEl);
+
+            prevEl.classList.add('animation-down')
+            prevEl.addEventListener("animationend", () =>{
+                prevEl.classList.remove('animation-down')
+            }, false);
+
+            item.style.top = 0;
+            margin = item.getBoundingClientRect().y;
+
+        } else if (nextContainer
+            && (item.getBoundingClientRect().bottom) > nextContainer.getBoundingClientRect().y){ //в нижний контейнер
+
+            let textEl = nextContainer.querySelector('.block__tittle');
+
+            nextContainer.prepend(item);
+            nextContainer.insertBefore(textEl, item)
+
+            textEl.classList.add('animation-up')
+            textEl.addEventListener("animationend", () =>{
+                textEl.classList.remove('animation-up')
+            }, false);
+
+            prevContainer = container;
+            container = nextContainer;
+            nextContainer = (container.nextElementSibling && container.nextElementSibling.classList.contains('drag-list')) ?
+                container.nextElementSibling : null;
+
+            item.style.top = 0;
+            margin = item.getBoundingClientRect().y;
+
+        } else if (prevContainer
+            && item.getBoundingClientRect().y < prevContainer.getBoundingClientRect().bottom){ //в верхний контейнер
+            prevContainer.appendChild(item);
+
+            nextContainer = container;
+            container = prevContainer;
+            prevContainer = (container.previousElementSibling && container.previousElementSibling.classList.contains('drag-list')) ?
+                container.previousElementSibling : null;
+
+            item.style.top = 0;
+            margin = item.getBoundingClientRect().y;
         }
-    })
-})
+    }
 
-function dragAfterElement(container, y) {
-    const draggbleElements = [...container.querySelectorAll(".shallow-draggable:not(.dragging)")]
+    function touchEnd (){
+        document.removeEventListener('touchmove', touchMove);
+        document.removeEventListener('mousemove', touchMove);
 
-    return draggbleElements.reduce(
-        (closest, child) => {
-            const box = child.getBoundingClientRect()
-            const offset = y - box.top - box.height / 2
-            if (offset < 0 && offset > closest.offset) {
-                return { offset: offset, element: child }
-            } else {
-                return closest
-            }
-        },
-        { offset: Number.NEGATIVE_INFINITY }
-    ).element
+        item.ontouchend = null;
+        item.style.transition = 'all .3s ease'
+        item.style.top = 0;
+    }
 }
