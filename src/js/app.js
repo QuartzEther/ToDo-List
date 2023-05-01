@@ -206,6 +206,23 @@ for (let item of items){
             item.style.top = 0;
             margin = item.getBoundingClientRect().y;
         }
+
+        if (container.classList.contains('block_complete')
+            && !item.classList.contains('item_complete')){
+
+            item.classList.replace('item_todo', 'item_complete');
+            item.querySelector('.text').innerHTML = `<strike>${item.querySelector('.text').innerHTML}</strike>`;
+
+            item.querySelector('.checkbox > input').checked = true;
+        }
+        else if (container.classList.contains('block_todo')
+            && !item.classList.contains('item_todo')){
+
+            item.classList.replace('item_complete','item_todo')
+            item.querySelector('.text').innerHTML = item.querySelector('.text > strike').innerHTML;
+
+            item.querySelector('.checkbox > input').checked = false;
+        }
     }
 
     function touchEnd (){
