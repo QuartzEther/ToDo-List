@@ -654,7 +654,8 @@ input:checked ~ .round-button {
   align-items: center;
   justify-content: space-between;
   padding: 0.8rem 0.2rem 0.8rem 1.2rem;
-  border-radius: 1rem; }
+  border-radius: 1rem;
+  background-color: white; }
   .item * {
     display: inline-block; }
   .item:not(:last-child) {
