@@ -207,10 +207,6 @@ for (let item of items){
             margin = item.getBoundingClientRect().y;
         }
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
         if (container.classList.contains('block_complete')
             && !item.classList.contains('item_complete')){
 
