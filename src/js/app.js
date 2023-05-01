@@ -12,29 +12,29 @@ const addBtn = document.querySelector('.header__btn');
 
 //--------------------------------------
 
-// itemList.push(new Item('text1'));
-// itemList.push(new Item('text2'));
-// itemList.push(new Item('text3', true));
+itemList.push(new Item('text1'));
+itemList.push(new Item('text2'));
+itemList.push(new Item('text3', true));
 
 //create html text
-// for (let id in itemList){
-//     itemList[id].createHTML(id);
-// }
-//
-// //add items in DOM
-// for (let item of itemList){
-//     if (item.isComplete){
-//         completeBlock.insertAdjacentHTML("beforeend", item.itemHtml);
-//     } else {
-//         todoBlock.insertAdjacentHTML("beforeend", item.itemHtml);
-//     }
-// }
-//
-// //calendar & checkbox init
-// for (let item of document.querySelectorAll('.item')){
-//     calendarInit(item.querySelector('.calendar'));
-//     item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
-// }
+for (let id in itemList){
+    itemList[id].createHTML(id);
+}
+
+//add items in DOM
+for (let item of itemList){
+    if (item.isComplete){
+        completeBlock.insertAdjacentHTML("beforeend", item.itemHtml);
+    } else {
+        todoBlock.insertAdjacentHTML("beforeend", item.itemHtml);
+    }
+}
+
+//calendar & checkbox init
+for (let item of document.querySelectorAll('.item')){
+    calendarInit(item.querySelector('.calendar'));
+    item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
+}
 
 //-----------------ADD NEW ITEM----------------
 
@@ -50,7 +50,7 @@ addBtn.addEventListener('click', ()=>{
 
         calendarInit(item.querySelector('.calendar'));
         item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
-        
+
         input.value = '';
     }
 })
@@ -74,5 +74,146 @@ function checkboxTouch(e){
 
             todoBlock.appendChild(item)
         }
+    }
+}
+
+//move with drug&drop
+const containers = document.querySelectorAll(".drag-list")
+const items = document.querySelectorAll(".drag-item")
+
+for (let item of items){
+
+    let container = item.parentElement;
+
+    let prevContainer = null;
+    let nextContainer = null;
+
+    if (containers.length > 1){
+        if (container.nextElementSibling && container.nextElementSibling.classList.contains('drag-list')){
+            nextContainer = container.nextElementSibling;
+        }
+        if (container.previousElementSibling && container.previousElementSibling.classList.contains('drag-list')){
+            prevContainer = container.previousElementSibling;
+        }
+    }
+
+    let margin =  item.getBoundingClientRect().y; //закрепление позиции item сверху
+
+    item.addEventListener('touchstart', touchStart);
+    item.addEventListener('mousedown', touchStart)
+
+    function touchStart (event){
+        event.preventDefault();
+
+        margin =  item.getBoundingClientRect().y; //закрепление позиции item сверху
+        item.style.transition = 'none'
+
+        item.style.position = 'relative';
+        item.style.zIndex = 1000;
+
+        if (event.targetTouches){
+            let touch = event.targetTouches[0];
+            item.style.top = touch.clientY - margin - item.offsetHeight / 2 + 'px';
+
+            document.addEventListener('touchmove', touchMove, {passive: false});
+            document.addEventListener('touchend', touchEnd);
+        } else {
+            item.style.top = event.clientY - margin - item.offsetHeight / 2 + 'px';
+
+            document.addEventListener('mousemove', touchMove);
+            document.addEventListener('mouseup', touchEnd);
+        }
+    }
+
+
+    function touchMove(event) {
+        event.preventDefault();
+
+        let touch = event.targetTouches? event.targetTouches[0]:event;
+        item.style.top = touch.clientY - margin - item.offsetHeight / 2 + 'px';
+
+        let thisEl = item;
+        let prevEl = thisEl.previousElementSibling;
+        let nextEl = thisEl.nextElementSibling;
+
+        //перемещение item
+
+        //перемещение вниз
+        if (nextEl && item.getBoundingClientRect().y > nextEl.getBoundingClientRect().y
+            && !nextEl.classList.contains('block__tittle')
+            && !nextEl.classList.contains('animation-down')){
+            container.insertBefore(nextEl, thisEl);
+
+            nextEl.classList.add('animation-up');
+            nextEl.addEventListener("animationend", () =>{
+                nextEl.classList.remove('animation-up')
+            }, false);
+
+            item.style.top = 0;
+            margin = item.getBoundingClientRect().y;
+
+
+        } else if (prevEl && item.getBoundingClientRect().y < prevEl.getBoundingClientRect().y
+            && !prevEl.classList.contains('block__tittle')
+            && !prevEl.classList.contains('animation-up')){ //вверх
+            container.insertBefore(thisEl, prevEl);
+
+            prevEl.classList.add('animation-down')
+            prevEl.addEventListener("animationend", () =>{
+                prevEl.classList.remove('animation-down')
+            }, false);
+
+            item.style.top = 0;
+            margin = item.getBoundingClientRect().y;
+
+        } else if (nextContainer
+            && (item.getBoundingClientRect().bottom) > nextContainer.getBoundingClientRect().y){ //в нижний контейнер
+
+            let textEl = nextContainer.querySelector('.block__tittle');
+
+            nextContainer.prepend(item);
+            nextContainer.insertBefore(textEl, item)
+
+            textEl.classList.add('animation-up')
+            textEl.addEventListener("animationend", () =>{
+                textEl.classList.remove('animation-up')
+            }, false);
+
+            prevContainer = container;
+            container = nextContainer;
+            nextContainer = (container.nextElementSibling && container.nextElementSibling.classList.contains('drag-list')) ?
+                container.nextElementSibling : null;
+
+            item.style.top = 0;
+            margin = item.getBoundingClientRect().y;
+
+        } else if (prevContainer
+            && item.getBoundingClientRect().y < prevContainer.getBoundingClientRect().bottom){ //в верхний контейнер
+
+            let textEl = container.querySelector('.block__tittle');
+            prevContainer.appendChild(item);
+
+            textEl.classList.add('animation-down')
+            textEl.addEventListener("animationend", () =>{
+                textEl.classList.remove('animation-down')
+            }, false);
+
+            nextContainer = container;
+            container = prevContainer;
+            prevContainer = (container.previousElementSibling && container.previousElementSibling.classList.contains('drag-list')) ?
+                container.previousElementSibling : null;
+
+            item.style.top = 0;
+            margin = item.getBoundingClientRect().y;
+        }
+    }
+
+    function touchEnd (){
+        document.removeEventListener('touchmove', touchMove);
+        document.removeEventListener('mousemove', touchMove);
+
+        item.ontouchend = null;
+        item.style.transition = 'all .3s ease'
+        item.style.top = 0;
     }
 }
