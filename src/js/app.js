@@ -140,7 +140,8 @@ for (let item of items){
 
         //перемещение вниз
         if (nextEl && item.getBoundingClientRect().y > nextEl.getBoundingClientRect().y
-            && !nextEl.classList.contains('block__tittle')){
+            && !nextEl.classList.contains('block__tittle')
+            && !nextEl.classList.contains('animation-down')){
             container.insertBefore(nextEl, thisEl);
 
             nextEl.classList.add('animation-up');
@@ -153,7 +154,8 @@ for (let item of items){
 
 
         } else if (prevEl && item.getBoundingClientRect().y < prevEl.getBoundingClientRect().y
-            && !prevEl.classList.contains('block__tittle')){ //вверх
+            && !prevEl.classList.contains('block__tittle')
+            && !prevEl.classList.contains('animation-up')){ //вверх
             container.insertBefore(thisEl, prevEl);
 
             prevEl.classList.add('animation-down')
@@ -187,7 +189,14 @@ for (let item of items){
 
         } else if (prevContainer
             && item.getBoundingClientRect().y < prevContainer.getBoundingClientRect().bottom){ //в верхний контейнер
+
+            let textEl = container.querySelector('.block__tittle');
             prevContainer.appendChild(item);
+
+            textEl.classList.add('animation-down')
+            textEl.addEventListener("animationend", () =>{
+                textEl.classList.remove('animation-down')
+            }, false);
 
             nextContainer = container;
             container = prevContainer;
