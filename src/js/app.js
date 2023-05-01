@@ -51,22 +51,12 @@ addBtn.addEventListener('click', ()=>{
         calendarInit(item.querySelector('.calendar'));
         item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
 
-        //for start dragging costing opacity
-        item.addEventListener("dragstart", () => {
-            item.classList.add("dragging")
-        })
-
-        //for end the dragging opacity costing
-        item.addEventListener("dragend", () => {
-            item.classList.remove("dragging")
-        })
-        
         input.value = '';
     }
 })
 //----------------Moving Items-------------------
 
-//move with checkbox
+//move width checkbox
 function checkboxTouch(e){
     //выборка именно input checkbox т.е один элемент
     if (e.target.id) {
@@ -150,7 +140,7 @@ for (let item of items){
 
         //перемещение вниз
         if (nextEl && item.getBoundingClientRect().y > nextEl.getBoundingClientRect().y
-        && !nextEl.classList.contains('block__tittle')){
+            && !nextEl.classList.contains('block__tittle')){
             container.insertBefore(nextEl, thisEl);
 
             nextEl.classList.add('animation-up');
@@ -163,7 +153,7 @@ for (let item of items){
 
 
         } else if (prevEl && item.getBoundingClientRect().y < prevEl.getBoundingClientRect().y
-        && !prevEl.classList.contains('block__tittle')){ //вверх
+            && !prevEl.classList.contains('block__tittle')){ //вверх
             container.insertBefore(thisEl, prevEl);
 
             prevEl.classList.add('animation-down')
