@@ -429,14 +429,14 @@ p {
 .animation-up {
   animation: 0.3s upAnimate forwards; }
 
+.animation-down {
+  animation: 0.3s downAnimate forwards; }
+
 @keyframes upAnimate {
   0% {
     transform: translateY(120%); }
   100% {
     transform: translateY(0%); } }
-.animation-down {
-  animation: 0.3s downAnimate forwards; }
-
 @keyframes downAnimate {
   0% {
     transform: translateY(-120%); }

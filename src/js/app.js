@@ -51,6 +51,8 @@ addBtn.addEventListener('click', ()=>{
         calendarInit(item.querySelector('.calendar'));
         item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
 
+        dragItem(item)
+
         input.value = '';
     }
 })
@@ -78,11 +80,16 @@ function checkboxTouch(e){
 }
 
 //move with drug&drop
-const containers = document.querySelectorAll(".drag-list")
 const items = document.querySelectorAll(".drag-item")
 
 for (let item of items){
+    dragItem(item);
+}
 
+//инициализация движения
+function dragItem(item){
+
+    let containers = document.querySelectorAll(".drag-list");
     let container = item.parentElement;
 
     let prevContainer = null;
