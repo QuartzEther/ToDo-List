@@ -427,7 +427,7 @@ p {
   font-size: 1.8rem; }
 
 .animation-up {
-  animation: 0.4s upAnimate forwards; }
+  animation: 0.3s upAnimate forwards; }
 
 @keyframes upAnimate {
   0% {
@@ -435,7 +435,7 @@ p {
   100% {
     transform: translateY(0%); } }
 .animation-down {
-  animation: 0.4s downAnimate forwards; }
+  animation: 0.3s downAnimate forwards; }
 
 @keyframes downAnimate {
   0% {
@@ -459,7 +459,7 @@ p {
       border-bottom: rgba(255, 255, 255, 0.15) solid 1px; }
 
 .header {
-  margin-bottom: 1.6rem;
+  margin-bottom: 0.6rem;
   padding-bottom: 2rem;
   border-bottom: rgba(0, 0, 0, 0.15) solid 1px;
   position: relative; }
@@ -482,6 +482,7 @@ p {
   width: 90%;
   margin: 0 auto; }
   .block__tittle {
+    margin-top: 1.6rem;
     margin-bottom: 1.6rem; }
 
 .input {
@@ -658,7 +659,7 @@ input:checked ~ .round-button {
   .item:not(:last-child) {
     margin-bottom: 1rem; }
   .item:last-child {
-    margin-bottom: 2rem; }
+    margin-bottom: 1rem; }
   .item__check-text {
     display: flex;
     align-items: center; }
@@ -674,6 +675,12 @@ input:checked ~ .round-button {
 .list_dark-mode > .block > .item {
   background-color: rgba(255, 255, 255, 0.1); }
 
+<<<<<<< Updated upstream
+=======
+.shallow-draggable {
+  transition: opacity 2s ease; }
+
+>>>>>>> Stashed changes
 .dragging {
   opacity: 0.5;
   transition: opacity 1s ease; }

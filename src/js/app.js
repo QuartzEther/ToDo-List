@@ -127,7 +127,7 @@ for (let item of items){
 
 
     function touchMove(event) {
-        event.preventDefault();
+        //event.preventDefault();
 
         let touch = event.targetTouches? event.targetTouches[0]:event;
         item.style.top = touch.clientY - margin - item.offsetHeight / 2 + 'px';
@@ -207,6 +207,10 @@ for (let item of items){
             margin = item.getBoundingClientRect().y;
         }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         if (container.classList.contains('block_complete')
             && !item.classList.contains('item_complete')){
 
