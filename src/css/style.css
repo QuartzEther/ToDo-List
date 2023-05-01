@@ -459,7 +459,7 @@ p {
       border-bottom: rgba(255, 255, 255, 0.15) solid 1px; }
 
 .header {
-  margin-bottom: 0.6rem;
+  margin-bottom: 1.6rem;
   padding-bottom: 2rem;
   border-bottom: rgba(0, 0, 0, 0.15) solid 1px;
   position: relative; }
@@ -480,9 +480,10 @@ p {
 
 .block {
   width: 90%;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding-bottom: 1rem; }
   .block__tittle {
-    margin-top: 1.6rem;
+    margin-top: 0.6rem;
     margin-bottom: 1.6rem; }
 
 .input {
@@ -659,7 +660,7 @@ input:checked ~ .round-button {
   .item:not(:last-child) {
     margin-bottom: 1rem; }
   .item:last-child {
-    margin-bottom: 1rem; }
+    margin-bottom: 0; }
   .item__check-text {
     display: flex;
     align-items: center; }
@@ -673,7 +674,7 @@ input:checked ~ .round-button {
     margin-right: 1.2rem; }
 
 .list_dark-mode > .block > .item {
-  background-color: rgba(255, 255, 255, 0.1); }
+  background-color: #46466D; }
 
 .drag-item {
   transition: opacity 2s ease; }

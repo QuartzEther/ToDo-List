@@ -109,7 +109,7 @@ for (let item of items){
         item.style.transition = 'none'
 
         item.style.position = 'relative';
-        item.style.zIndex = 1000;
+        item.style.zIndex = '10';
 
         if (event.targetTouches){
             let touch = event.targetTouches[0];
@@ -232,5 +232,8 @@ for (let item of items){
         item.ontouchend = null;
         item.style.transition = 'all .3s ease'
         item.style.top = 0;
+
+        item.style.zIndex = '1';
+
     }
 }
