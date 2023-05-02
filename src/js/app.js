@@ -79,11 +79,6 @@ function checkboxTouch(e){
 
             todoBlock.appendChild(item)
         }
-
-        // item.removeEventListener('touchstart', touchStart)
-        // item.removeEventListener('mousedown', touchStart)
-        //
-        // dragItem(item);
     }
 }
 
@@ -112,13 +107,12 @@ function dragItem(item){
         }
     }
 
-    let margin =  item.getBoundingClientRect().y; //закрепление позиции item сверху
+    let margin = item.getBoundingClientRect().y; //закрепление позиции item сверху
 
     item.addEventListener('touchstart', touchStart, {passive: false});
     item.addEventListener('mousedown', touchStart);
 
     function touchStart (event){
-
         //---------Отслеживание нажатия на checkbox или календарь
         if (event.target.tagName.toLowerCase() == 'label' || event.target.tagName.toLowerCase() == 'input'){
             return;
@@ -126,6 +120,23 @@ function dragItem(item){
 
         //----------Начало драг&дроп
         event.preventDefault();
+
+        //if checkbox click & item container != reel container
+        if (container != item.parentElement){
+
+            container = item.parentElement;
+            nextContainer = null;
+            prevContainer = null;
+
+            if (containers.length > 1){
+                if (container.nextElementSibling && container.nextElementSibling.classList.contains('drag-list')){
+                    nextContainer = container.nextElementSibling;
+                }
+                if (container.previousElementSibling && container.previousElementSibling.classList.contains('drag-list')){
+                    prevContainer = container.previousElementSibling;
+                }
+            }
+        }
 
         margin =  item.getBoundingClientRect().y; //закрепление позиции item сверху
         item.style.transition = 'none'
