@@ -16,9 +16,6 @@ itemList.push(new Item('text1'));
 itemList.push(new Item('text2'));
 itemList.push(new Item('text3', true));
 
-//itemList.push(new Item('text1 text1 text1 text1 text1 text1 text1 text1 text1'));
-
-
 //create html text
 for (let id in itemList){
     itemList[id].createHTML(id);
@@ -33,10 +30,13 @@ for (let item of itemList){
     }
 }
 
-//calendar & checkbox init
-for (let item of document.querySelectorAll('.item')){
+//calendar, checkbox and drug&drop init
+for (let item of document.querySelectorAll('.drag-item')){
     calendarInit(item.querySelector('.calendar'));
     item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
+    dragItem(item);
+
+    //item.addEventListener('dblclick', (e)=>{item.style.backgroundColor = 'red'})
 }
 
 //-----------------ADD NEW ITEM----------------
@@ -83,13 +83,6 @@ function checkboxTouch(e){
 }
 
 //move with drug&drop
-const items = document.querySelectorAll(".drag-item")
-
-for (let item of items){
-    dragItem(item);
-}
-
-//инициализация движения
 function dragItem(item){
 
     let containers = document.querySelectorAll(".drag-list");
@@ -109,14 +102,28 @@ function dragItem(item){
 
     let margin = item.getBoundingClientRect().y; //закрепление позиции item сверху
 
+    let click1 = null;
+    let click2 = null;
+
     item.addEventListener('touchstart', touchStart, {passive: false});
     item.addEventListener('mousedown', touchStart);
 
     function touchStart (event){
+
         //---------Отслеживание нажатия на checkbox или календарь
-        if (event.target.tagName.toLowerCase() == 'label' || event.target.tagName.toLowerCase() == 'input'){
+        if (event.target.tagName.toLowerCase() == 'label'
+            || event.target.tagName.toLowerCase() == 'input'){
             return;
         }
+
+        //--------Double click/tap
+        click2 = Date.now();
+
+        if (click1 && click2 - click1 < 200){
+            popUp(item);
+            return;
+        }
+        click1 = click2;
 
         //----------Начало драг&дроп
         event.preventDefault();
@@ -268,4 +275,10 @@ function dragItem(item){
 
         item.style.zIndex = '1';
     }
+}
+
+//pop-up
+function popUp(item){
+    item.style.backgroundColor = 'red';
+
 }
