@@ -246,6 +246,5 @@ function dragItem(item){
         item.style.top = 0;
 
         item.style.zIndex = '1';
-
     }
 }
