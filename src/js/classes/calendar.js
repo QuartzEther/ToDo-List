@@ -20,6 +20,8 @@ function dateToInner(calendar, input){
         calendar.querySelector('.calendar__text').style.visibility = 'inherit';
         calendar.querySelector('.calendar__img').style.visibility = 'inherit';
 
+        calendar.style.width = '10.3rem';
+        calendar.style.paddingRight = '.3rem'
 
         let date = new Date();
         date.setDate(date.getDate()-1)
@@ -42,11 +44,14 @@ function dateToInner(calendar, input){
         }
 
     } else {
-        calendar.querySelector('.calendar__text').innerHTML = '00/00/0000';
-        input.style.cursor = 'pointer'
+        calendar.querySelector('.calendar__text').innerHTML = '';
+        calendar.style.width = 'auto';
+        calendar.style.paddingRight = '1rem'
+
+        input.style.cursor = 'pointer';
 
         calendar.querySelector('.calendar__text').style.visibility = 'hidden';
-        calendar.querySelector('.calendar__img').style.visibility = 'hidden';
+        //calendar.querySelector('.calendar__img').style.visibility = 'hidden';
     }
 
 }
