@@ -16,6 +16,9 @@ itemList.push(new Item('text1'));
 itemList.push(new Item('text2'));
 itemList.push(new Item('text3', true));
 
+//itemList.push(new Item('text1 text1 text1 text1 text1 text1 text1 text1 text1'));
+
+
 //create html text
 for (let id in itemList){
     itemList[id].createHTML(id);
@@ -111,10 +114,17 @@ function dragItem(item){
 
     let margin =  item.getBoundingClientRect().y; //закрепление позиции item сверху
 
-    item.addEventListener('touchstart', touchStart);
+    item.addEventListener('touchstart', touchStart, {passive: false});
     item.addEventListener('mousedown', touchStart);
 
     function touchStart (event){
+
+        //---------Отслеживание нажатия на checkbox или календарь
+        if (event.target.tagName.toLowerCase() == 'label' || event.target.tagName.toLowerCase() == 'input'){
+            return;
+        }
+
+        //----------Начало драг&дроп
         event.preventDefault();
 
         margin =  item.getBoundingClientRect().y; //закрепление позиции item сверху
@@ -139,7 +149,7 @@ function dragItem(item){
 
 
     function touchMove(event) {
-        //event.preventDefault();
+        event.preventDefault();
 
         let touch = event.targetTouches? event.targetTouches[0]:event;
         item.style.top = touch.clientY - margin - item.offsetHeight / 2 + 'px';

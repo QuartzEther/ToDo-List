@@ -22,10 +22,19 @@
     box-shadow: .1rem .2rem .6rem rgba(0, 0, 0, 0.25)
 
   &_complete
-    opacity: .7
+    opacity: .75
 
   &__checkbox
     margin-right: 1.2rem
+
+  &__text
+    max-width: 20rem
+    white-space: nowrap /* Запрещаем перенос строк */
+    overflow: hidden
+    text-overflow: ellipsis
+    padding: .5rem 0
+
+
 
 .list_dark-mode > .block > .item
   background-color: $color-item-dark

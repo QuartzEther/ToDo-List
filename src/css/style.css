@@ -667,9 +667,15 @@ input:checked ~ .round-button {
   .item_todo {
     box-shadow: 0.1rem 0.2rem 0.6rem rgba(0, 0, 0, 0.25); }
   .item_complete {
-    opacity: 0.7; }
+    opacity: 0.75; }
   .item__checkbox {
     margin-right: 1.2rem; }
+  .item__text {
+    max-width: 20rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.5rem 0; }
 
 .list_dark-mode > .block > .item {
   background-color: #46466D; }
@@ -686,6 +692,7 @@ input:checked ~ .round-button {
   display: flex;
   align-items: center;
   padding: 1rem;
+  padding-left: 0;
   opacity: 0.6; }
   .calendar input[type="date"] {
     position: absolute;
