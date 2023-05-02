@@ -76,6 +76,11 @@ function checkboxTouch(e){
 
             todoBlock.appendChild(item)
         }
+
+        // item.removeEventListener('touchstart', touchStart)
+        // item.removeEventListener('mousedown', touchStart)
+        //
+        // dragItem(item);
     }
 }
 
@@ -107,7 +112,7 @@ function dragItem(item){
     let margin =  item.getBoundingClientRect().y; //закрепление позиции item сверху
 
     item.addEventListener('touchstart', touchStart);
-    item.addEventListener('mousedown', touchStart)
+    item.addEventListener('mousedown', touchStart);
 
     function touchStart (event){
         event.preventDefault();
@@ -174,7 +179,7 @@ function dragItem(item){
             margin = item.getBoundingClientRect().y;
 
         } else if (nextContainer
-            && (item.getBoundingClientRect().bottom) > nextContainer.getBoundingClientRect().y){ //в нижний контейнер
+            && (item.getBoundingClientRect().bottom) > nextContainer.querySelector('.block__tittle').getBoundingClientRect().bottom + 10){ //в нижний контейнер
 
             let textEl = nextContainer.querySelector('.block__tittle');
 

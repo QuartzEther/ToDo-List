@@ -1,5 +1,9 @@
 let toggle = document.querySelector('.toggle-switch>input');
 toggle.addEventListener('click', ()=>{
+
+
+
+
     if (toggle.checked) {
         document.querySelector('body').style.backgroundColor = '#434582';
 

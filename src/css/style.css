@@ -481,7 +481,7 @@ p {
 .block {
   width: 90%;
   margin: 0 auto;
-  padding-bottom: 1rem; }
+  padding-bottom: 0.1rem; }
   .block__tittle {
     margin-top: 0.6rem;
     margin-bottom: 1.6rem; }
@@ -655,13 +655,10 @@ input:checked ~ .round-button {
   justify-content: space-between;
   padding: 0.8rem 0.2rem 0.8rem 1.2rem;
   border-radius: 1rem;
+  margin-bottom: 1rem;
   background-color: white; }
   .item * {
     display: inline-block; }
-  .item:not(:last-child) {
-    margin-bottom: 1rem; }
-  .item:last-child {
-    margin-bottom: 0; }
   .item__check-text {
     display: flex;
     align-items: center; }
