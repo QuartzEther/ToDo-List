@@ -473,10 +473,9 @@ p {
     top: 50%;
     right: 3%; }
   .header__toggle-switch {
-    transform: scale(0.65);
+    transform: scale(0.55);
     margin-left: auto;
-    margin-right: 1rem;
-    margin-bottom: 1rem; }
+    margin-bottom: 0.5rem; }
 
 .block {
   width: 90%;
