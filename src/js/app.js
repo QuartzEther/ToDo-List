@@ -110,24 +110,6 @@ function dragItem(item){
 
     function touchStart (event){
 
-        //---------Отслеживание нажатия на checkbox или календарь
-        if (event.target.tagName.toLowerCase() == 'label'
-            || event.target.tagName.toLowerCase() == 'input'){
-            return;
-        }
-
-        //--------Double click/tap
-        click2 = Date.now();
-
-        if (click1 && click2 - click1 < 200){
-            popUp(item);
-            return;
-        }
-        click1 = click2;
-
-        //----------Начало драг&дроп
-        event.preventDefault();
-
         //if checkbox click & item container != reel container
         if (container != item.parentElement){
 
@@ -145,6 +127,25 @@ function dragItem(item){
             }
         }
 
+        //---------Отслеживание нажатия на checkbox или календарь
+        if (event.target.tagName.toLowerCase() == 'label'
+            || event.target.tagName.toLowerCase() == 'input'){
+            return;
+        }
+
+        //отключение прокрутки страницы
+        event.preventDefault();
+
+        //--------Double click/tap
+        click2 = Date.now();
+
+        if (click1 && click2 - click1 < 200){
+            popUp(item);
+            return;
+        }
+        click1 = click2;
+
+        //----------Начало драг&дроп
         margin =  item.getBoundingClientRect().y; //закрепление позиции item сверху
         item.style.transition = 'none'
 
@@ -279,6 +280,7 @@ function dragItem(item){
 
 //pop-up
 function popUp(item){
-    item.style.backgroundColor = 'red';
+    let popUp = document.querySelector('.pop-up');
+    popUp.style.visibility = 'visible'
 
 }

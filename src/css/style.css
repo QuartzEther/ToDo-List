@@ -464,14 +464,8 @@ p {
   border-bottom: rgba(0, 0, 0, 0.15) solid 1px;
   position: relative; }
   .header__form {
-    position: relative;
     width: 90%;
     margin: 0 auto; }
-  .header__btn {
-    position: absolute;
-    transform: translateY(-50%);
-    top: 50%;
-    right: 3%; }
   .header__toggle-switch {
     transform: scale(0.55);
     margin-left: auto;
@@ -484,6 +478,35 @@ p {
   .block__tittle {
     margin-top: 0.6rem;
     margin-bottom: 1.6rem; }
+
+.pop-up {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .pop-up__menu {
+    background-color: #ffffff;
+    border-radius: 2rem;
+    width: 38rem;
+    height: 24rem;
+    filter: drop-shadow(0.2rem 0.4rem 0.4rem rgba(0, 0, 0, 0.25));
+    padding: 2rem; }
+    .pop-up__menu:not(:last-child) {
+      margin-bottom: 1rem; }
+
+.form {
+  position: relative; }
+
+.btn {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  right: 3%; }
 
 .input {
   color: #2a2b52;
