@@ -15,7 +15,6 @@ function calendarInit(calendar, noSize = false){
 
 function dateToInner(calendar, input, noSize = false){
     if (input.value){
-
         input.style.cursor = 'auto'
         calendar.querySelector('.calendar__text').style.visibility = 'inherit';
         calendar.querySelector('.calendar__img').style.visibility = 'inherit';
@@ -56,6 +55,7 @@ function dateToInner(calendar, input, noSize = false){
             calendar.style.width = 'auto';
             calendar.style.paddingRight = '1rem'
         } else {
+            calendar.style.width = '10%'
             calendar.querySelector('.calendar__img').style.marginRight = '0';
         }
 
@@ -67,4 +67,4 @@ function dateToInner(calendar, input, noSize = false){
 
 }
 
-export default calendarInit;
+export {calendarInit, dateToInner};

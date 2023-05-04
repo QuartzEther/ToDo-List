@@ -1,4 +1,4 @@
-import calendarInit from './classes/calendar.js'
+import {calendarInit, dateToInner} from './classes/calendar.js'
 import {Item} from './classes/item.js'
 
 //-----------------INIT----------------
@@ -283,12 +283,41 @@ function popUp(item){
     //init
     let popUp = document.querySelector('.pop-up');
     popUp.style.visibility = 'visible'
-
-    calendarInit(popUp.querySelector('.calendar'), true);
+    let btnOk = popUp.querySelector('.pop-btn_ok');
+    let btnDel = popUp.querySelector('.pop-btn_del');
 
     //заполнение исходя из item
+
+    //text
     popUp.querySelector('.form > input').value = item.querySelector('.text').innerHTML;
 
-    //let text = popUp.querySelector('')
+    //calendar
+    calendarInit(popUp.querySelector('.calendar'), true);
+    dateToInner(popUp.querySelector('.calendar'), item.querySelector('.calendar > input'), true)
 
+
+    btnOk.addEventListener('click', changeItem);
+    btnDel.addEventListener('click', deleteItem);
+
+    function changeItem() {
+        //text
+        item.querySelector('.text').innerHTML = popUp.querySelector('.form > input').value;
+        //calendar
+        dateToInner(item.querySelector('.calendar'), popUp.querySelector('.calendar > input'))
+
+        closePopUp()
+    }
+
+    function deleteItem() {
+        item.remove();
+
+        closePopUp()
+    }
+
+    function closePopUp(){
+        popUp.style.visibility = 'hidden';
+
+        btnOk.removeEventListener('click', changeItem);
+        btnDel.removeEventListener('click', deleteItem);
+    }
 }

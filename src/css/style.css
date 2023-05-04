@@ -538,8 +538,7 @@ p {
   padding: 0.5rem 0.7rem;
   border-radius: 0.7rem;
   border: 2px solid transparent;
-  width: 12rem;
-  transition: 0.3s all; }
+  width: 12rem; }
   .pop-btn_del {
     background-color: #bc2c2c; }
     .pop-btn_del:hover {
