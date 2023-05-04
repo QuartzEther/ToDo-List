@@ -35,9 +35,9 @@ for (let item of document.querySelectorAll('.drag-item')){
     calendarInit(item.querySelector('.calendar'));
     item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
     dragItem(item);
-
     //item.addEventListener('dblclick', (e)=>{item.style.backgroundColor = 'red'})
 }
+
 
 //-----------------ADD NEW ITEM----------------
 
@@ -280,7 +280,15 @@ function dragItem(item){
 
 //pop-up
 function popUp(item){
+    //init
     let popUp = document.querySelector('.pop-up');
     popUp.style.visibility = 'visible'
+
+    
+
+    //заполнение исходя из item
+    popUp.querySelector('.form > input').value = item.querySelector('.text').innerHTML;
+
+    //let text = popUp.querySelector('')
 
 }

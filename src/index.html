@@ -40,8 +40,7 @@
     <div class="pop-up">
         <div class="pop-up__menu">
             <div class="pop-up__form form"> 
-                <input type="text" class="pop-up__input input" placeholder="Add Item" required="" maxlength="30"/>
-                <button class="pop-up__btn btn btn_pls">✓</button>
+                <input type="text" class="pop-up__input input" placeholder="Change Item" required="" maxlength="30"/>
             </div>
             <div class="pop-up__color-bar color-bar">
                 <input type="radio" name="color" id="red" value="red" />
@@ -64,7 +63,15 @@
 
                 <input type="radio" name="color" id="base" checked/>
                 <label for="base"><span class="base"></span></label>
-
+            </div>
+            <div class="pop-up__calendar calendar">
+                <input type="date">
+                <div class="calendar__img"></div>
+                <h5 class="calendar__text"></h5>
+            </div>
+            <div class="pop-up__buttons">
+                <button class="pop-up__btn pop-btn pop-btn_del">Delete Item</button>
+                <button class="pop-up__btn pop-btn pop-btn_ok">Ok ✓</button>
             </div>
         </div>
     </div>

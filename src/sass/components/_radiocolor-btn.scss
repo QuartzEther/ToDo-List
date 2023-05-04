@@ -1,5 +1,5 @@
 $colors: (
-  red: #474747,
+  red: #e20d0d,
   orange: #F2711C,
   yellow: #FBBD08,
   green: #B5CC18,
@@ -13,16 +13,35 @@ $colors-dark: (
   orange: #e17014,
   yellow: #dea90a,
   green: #539412,
-  blue: #06968f,
+  blue: #2a3d9c,
   violet: #6435C9,
   base: #f0f0f0
-  
 );
 
 .color-bar > input[type="radio"] {
   display: none;
   &:checked + label {
-    span { transform: scale(1.2); }
+    span {
+      transform: scale(1.2);
+      &:after {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #ffffff;
+        position: absolute;
+        z-index: 10;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+
+        @each $name, $value in $colors {
+          .#{$name} {
+            border: 2px solid darken($value, 20%);
+          }
+        }
+      }
+    }
     @each $name, $value in $colors {
       .#{$name} {
         border: .2rem solid darken($value, 20%);
@@ -48,6 +67,7 @@ $colors-dark: (
     display: block;
     width: 100%;
     height: 100%;
+    border-radius: 50%;
     transition: transform .2s ease-in-out;
     @each $name, $value in $colors {
       &.#{$name} {
