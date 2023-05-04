@@ -845,9 +845,9 @@ input:checked ~ .round-button {
     margin-bottom: 1rem; }
   .pop-up__calendar {
     padding-left: 2rem;
-    margin-bottom: 0.5rem;
-    display: inline-block;
-    transform: scale(1.2); }
+    margin-bottom: 1rem;
+    transform: scale(1.15);
+    opacity: 0.7; }
   .pop-up__buttons {
     display: flex;
     flex-direction: row;

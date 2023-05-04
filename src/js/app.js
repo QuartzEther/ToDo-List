@@ -284,7 +284,7 @@ function popUp(item){
     let popUp = document.querySelector('.pop-up');
     popUp.style.visibility = 'visible'
 
-    
+    calendarInit(popUp.querySelector('.calendar'), true);
 
     //заполнение исходя из item
     popUp.querySelector('.form > input').value = item.querySelector('.text').innerHTML;

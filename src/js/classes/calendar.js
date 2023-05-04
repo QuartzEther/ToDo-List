@@ -1,8 +1,8 @@
-function calendarInit(calendar){
+function calendarInit(calendar, noSize = false){
     const input = calendar.querySelector('input');
 
     //заполнение поля text
-    dateToInner(calendar, input);
+    dateToInner(calendar, input, noSize);
 
     //появление поля выбора
     calendar.addEventListener('click', ()=>{
@@ -10,17 +10,17 @@ function calendarInit(calendar){
     })
 
     //изменение поля text
-    input.addEventListener("change", (event) => dateToInner( calendar, input));
+    input.addEventListener("change", (event) => dateToInner( calendar, input, noSize));
 }
 
-function dateToInner(calendar, input){
+function dateToInner(calendar, input, noSize = false){
     if (input.value){
 
         input.style.cursor = 'auto'
         calendar.querySelector('.calendar__text').style.visibility = 'inherit';
         calendar.querySelector('.calendar__img').style.visibility = 'inherit';
 
-        calendar.style.width = '10.3rem';
+        calendar.style.width = noSize? '12rem':'10.3rem';
         calendar.style.paddingRight = '.3rem'
 
         let date = new Date();
