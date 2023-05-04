@@ -538,6 +538,7 @@ p {
   padding: 0.5rem 0.7rem;
   border-radius: 0.7rem;
   border: 2px solid transparent;
+  width: 12rem;
   transition: 0.3s all; }
   .pop-btn_del {
     background-color: #bc2c2c; }
@@ -715,8 +716,7 @@ input:checked ~ .round-button {
   position: relative;
   display: flex;
   align-items: center;
-  padding: 1rem;
-  padding-left: 0;
+  padding: 1rem 0;
   opacity: 0.6; }
   .calendar input[type="date"] {
     position: absolute;
@@ -837,18 +837,24 @@ input:checked ~ .round-button {
     border-radius: 2rem;
     width: 38rem;
     filter: drop-shadow(0.2rem 0.4rem 0.4rem rgba(0, 0, 0, 0.25));
-    padding: 2rem; }
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
   .pop-up__form {
-    margin-bottom: 2rem; }
+    margin-bottom: 2rem;
+    width: 90%; }
   .pop-up__color-bar {
-    padding-left: 2rem;
+    margin: 0 auto;
     margin-bottom: 1rem; }
   .pop-up__calendar {
-    padding-left: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.7rem;
     transform: scale(1.15);
-    opacity: 0.7; }
+    opacity: 0.7;
+    justify-content: center; }
   .pop-up__buttons {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around; }
