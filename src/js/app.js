@@ -281,6 +281,29 @@ function dragItem(item){
 }
 
 //pop-up
+
+//colors
+export let colors = {
+    light : {
+        red: '#e20d0d',
+        orange: '#f2711c',
+        yellow: '#fbbd08',
+        green: '#B5CC18',
+        blue: '#00bcd4',
+        violet: '#cd5dde',
+        base: '#ffffff'
+    },
+    dark : {
+        red: '#ae1616',
+        orange: '#e17014',
+        yellow: '#dea90a',
+        green: '#539412',
+        blue: '#2a3d9c',
+        violet: '#6435C9',
+        base: '#46466d'
+    }
+}
+
 function popUp(item){
     //init
     let popUp = document.querySelector('.pop-up');
@@ -288,17 +311,26 @@ function popUp(item){
     let btnOk = popUp.querySelector('.pop-btn_ok');
     let btnDel = popUp.querySelector('.pop-btn_del');
 
+    let colorBar = popUp.querySelectorAll('.color-bar > input');
+    let colorTheme = document.querySelector('.list').classList.contains('list_dark-mode') ? colors.dark : colors.light;
+    let itemColor = getColor(item).toLowerCase();
 
     //заполнение исходя из item
     //text
-    //popUp.querySelector('.form > input').value = item.querySelector('.text').innerHTML;
-
     popUp.querySelector('.form > input').value = item.querySelector('.text> strike') ?
         item.querySelector('.text> strike').innerHTML : item.querySelector('.text').innerHTML;
 
     //calendar
     dateToInner(popUp.querySelector('.calendar'), item.querySelector('.calendar > input'), true);
 
+    //color
+    for (let color of Object.entries(colorTheme)){
+        if (itemColor == color[1].toLowerCase()) {
+            for (let colorItem of colorBar){
+                colorItem.checked = (colorItem.id == color[0]) ? true : false;
+            }
+        }
+    }
 
 
     btnOk.addEventListener('click', changeItem);
@@ -314,7 +346,13 @@ function popUp(item){
         //calendar
         dateToInner(item.querySelector('.calendar'), popUp.querySelector('.calendar > input'));
 
+        //color
+        for (let colorItem of colorBar){
+            if (colorItem.checked){
+                item.style.backgroundColor = colorTheme[colorItem.id]
 
+            }
+        }
         closePopUp()
     }
 
@@ -330,4 +368,23 @@ function popUp(item){
         btnOk.removeEventListener('click', changeItem);
         btnDel.removeEventListener('click', deleteItem);
     }
+}
+
+export function getColor(tag) {
+    let toHex = function(color) {
+        let hex = function(str) {
+            let result = parseInt(str).toString(16);
+            if (result.length < 2)
+                result = '0' + result;
+            return result;
+        }
+
+        let rgb = color.match(/^rgb\(\s*(\d+),\s*(\d+),\s*(\d+)\s*\)$/);
+        if (!rgb)
+            return color;
+        return '#' + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+    }
+
+    let style = window.getComputedStyle(tag);
+    return toHex(style.backgroundColor);
 }
