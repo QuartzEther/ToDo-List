@@ -401,7 +401,7 @@ body {
 * {
   font-family: "Roboto";
   font-weight: 300;
-  color: #434343; }
+  color: #1a1a1a; }
 
 h2 {
   font-family: "Roboto";
@@ -691,7 +691,7 @@ input:checked ~ .round-button {
   .item_todo {
     box-shadow: 0.1rem 0.2rem 0.6rem rgba(0, 0, 0, 0.25); }
   .item_complete {
-    opacity: 0.75; }
+    opacity: 0.8; }
   .item__checkbox {
     margin-right: 1.2rem; }
   .item__text {
@@ -716,7 +716,7 @@ input:checked ~ .round-button {
   display: flex;
   align-items: center;
   padding: 1rem 0;
-  opacity: 0.6; }
+  opacity: 0.7; }
   .calendar input[type="date"] {
     position: absolute;
     width: 100%;
@@ -740,7 +740,7 @@ input:checked ~ .round-button {
     opacity: 0.6;
     margin-right: 0.5rem; }
   .calendar:hover {
-    opacity: 0.8; }
+    opacity: 0.9; }
 
 .list_dark-mode .calendar__img {
   background-image: url("../img/calendar_dark.png");
@@ -820,6 +820,56 @@ input:checked ~ .round-button {
     .color-bar > label span.base {
       background: #f0f0f0; }
 
+.pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label span {
+  transform: scale(1.2); }
+  .pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label span:after {
+    content: '';
+    background-color: #ffffffb2; }
+    .pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label span:after .red {
+      border: 2px solid #e74343; }
+    .pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label span:after .orange {
+      border: 2px solid #f2a769; }
+    .pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label span:after .yellow {
+      border: 2px solid #f7cf57; }
+    .pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label span:after .green {
+      border: 2px solid #86e527; }
+    .pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label span:after .blue {
+      border: 2px solid #5a6ed2; }
+    .pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label span:after .violet {
+      border: 2px solid #a285df; }
+    .pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label span:after .base {
+      border: 2px solid #7474a5; }
+.pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label .red {
+  border: 0.2rem solid #e74343; }
+.pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label .orange {
+  border: 0.2rem solid #f2a769; }
+.pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label .yellow {
+  border: 0.2rem solid #f7cf57; }
+.pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label .green {
+  border: 0.2rem solid #86e527; }
+.pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label .blue {
+  border: 0.2rem solid #5a6ed2; }
+.pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label .violet {
+  border: 0.2rem solid #a285df; }
+.pop-up_dark-mode > .pop-up__menu .color-bar > input[type="radio"]:checked + label .base {
+  border: 0.2rem solid #7474a5; }
+.pop-up_dark-mode > .pop-up__menu .color-bar > label:hover span {
+  transform: scale(1.2); }
+.pop-up_dark-mode > .pop-up__menu .color-bar > label span.red {
+  background: #ae1616; }
+.pop-up_dark-mode > .pop-up__menu .color-bar > label span.orange {
+  background: #e17014; }
+.pop-up_dark-mode > .pop-up__menu .color-bar > label span.yellow {
+  background: #dea90a; }
+.pop-up_dark-mode > .pop-up__menu .color-bar > label span.green {
+  background: #539412; }
+.pop-up_dark-mode > .pop-up__menu .color-bar > label span.blue {
+  background: #2a3d9c; }
+.pop-up_dark-mode > .pop-up__menu .color-bar > label span.violet {
+  background: #6435C9; }
+.pop-up_dark-mode > .pop-up__menu .color-bar > label span.base {
+  background: #46466d; }
+
 .pop-up {
   visibility: hidden;
   width: 100%;
@@ -857,6 +907,19 @@ input:checked ~ .round-button {
     display: flex;
     flex-direction: row;
     justify-content: space-around; }
+
+.pop-up_dark-mode * {
+  color: rgba(244, 244, 244, 0.85); }
+.pop-up_dark-mode .calendar__img {
+  background-image: url("../img/calendar_dark.png");
+  opacity: 0.8; }
+.pop-up_dark-mode .pop-up__form > input {
+  color: #ffffff;
+  background-color: #272851; }
+  .pop-up_dark-mode .pop-up__form > input:focus, .pop-up_dark-mode .pop-up__form > input:hover {
+    border-color: #abc6c9; }
+.pop-up_dark-mode .pop-up__menu {
+  background-color: #31315c; }
 
 .padding-0px {
   padding: 0; }

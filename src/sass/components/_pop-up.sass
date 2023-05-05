@@ -28,6 +28,7 @@
     &__color-bar
         margin: 0 auto
         margin-bottom: 1rem
+
     &__calendar
         margin-bottom: 1.7rem
         transform: scale(1.15)
@@ -38,3 +39,18 @@
         display: flex
         flex-direction: row
         justify-content: space-around
+
+.pop-up_dark-mode
+    *
+        color: $color-text-dark
+    .calendar__img
+        background-image: url("../img/calendar_dark.png")
+        opacity: 0.8
+    .pop-up__form > input
+        color: $color-white
+        background-color: $color-blue-dark
+        &:focus, &:hover
+            border-color: $color-border-dark
+
+    .pop-up__menu
+        background-color: $color-blue-light

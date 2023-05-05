@@ -37,7 +37,6 @@ for (let item of document.querySelectorAll('.drag-item')){
     dragItem(item);
     //item.addEventListener('dblclick', (e)=>{item.style.backgroundColor = 'red'})
 }
-calendarInit(document.querySelector('.pop-up__calendar'), true);
 
 
 
@@ -285,7 +284,7 @@ function dragItem(item){
 //colors
 export let colors = {
     light : {
-        red: '#e20d0d',
+        red: '#f22a2a',
         orange: '#f2711c',
         yellow: '#fbbd08',
         green: '#B5CC18',
@@ -304,12 +303,16 @@ export let colors = {
     }
 }
 
+
 function popUp(item){
     //init
     let popUp = document.querySelector('.pop-up');
     popUp.style.visibility = 'visible'
+
     let btnOk = popUp.querySelector('.pop-btn_ok');
     let btnDel = popUp.querySelector('.pop-btn_del');
+
+    calendarInit(document.querySelector('.pop-up__calendar'), true);
 
     let colorBar = popUp.querySelectorAll('.color-bar > input');
     let colorTheme = document.querySelector('.list').classList.contains('list_dark-mode') ? colors.dark : colors.light;

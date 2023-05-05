@@ -11,6 +11,7 @@ toggle.addEventListener('click', ()=>{
         document.querySelector('.toggle-switch').style.boxShadow = "0 0 15px 10px rgba(0,0,0,0.1) inset";
 
         document.querySelector('.list').classList.add('list_dark-mode');
+        document.querySelector('.pop-up').classList.add('pop-up_dark-mode');
 
         chengeColorTheme (colors.light, colors.dark);
     } else {
@@ -20,6 +21,8 @@ toggle.addEventListener('click', ()=>{
         document.querySelector('.toggle-switch').style.boxShadow = "0 0 15px 10px rgba(0,0,0,0.1) inset";
 
         document.querySelector('.list').classList.remove('list_dark-mode');
+        document.querySelector('.pop-up').classList.remove('pop-up_dark-mode');
+
 
         chengeColorTheme (colors.dark, colors.light);
     }

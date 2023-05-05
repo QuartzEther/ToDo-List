@@ -9,16 +9,17 @@ $colors: (
 );
 
 $colors-dark: (
-  red: #ae1616,
-  orange: #e17014,
-  yellow: #dea90a,
-  green: #539412,
-  blue: #2a3d9c,
-  violet: #6435C9,
-  base: #f0f0f0
+        red: #ae1616,
+        orange: #e17014,
+        yellow: #dea90a,
+        green: #539412,
+        blue: #2a3d9c,
+        violet: #6435C9,
+        base: #46466d
 );
 
 .color-bar > input[type="radio"] {
+
   display: none;
   &:checked + label {
     span {
@@ -40,6 +41,7 @@ $colors-dark: (
             border: 2px solid darken($value, 20%);
           }
         }
+
       }
     }
     @each $name, $value in $colors {
@@ -72,6 +74,44 @@ $colors-dark: (
     @each $name, $value in $colors {
       &.#{$name} {
         background: $value;
+      }
+    }
+  }
+}
+
+.pop-up_dark-mode > .pop-up__menu {
+  .color-bar > input[type="radio"] {
+    &:checked + label {
+      span {
+        transform: scale(1.2);
+        &:after {
+          content: '';
+          background-color: #ffffffb2;
+          @each $name, $value in $colors-dark {
+            .#{$name} {
+              border: 2px solid lighten($value, 20%);
+            }
+          }
+        }
+      }
+      @each $name, $value in $colors-dark {
+        .#{$name} {
+          border: .2rem solid lighten($value, 20%);
+        }
+      } // !@each
+    } // !&:checked + label
+  }
+  .color-bar > label {
+    &:hover {
+      span {
+        transform: scale(1.2);
+      }
+    }
+    span {
+      @each $name, $value in $colors-dark {
+        &.#{$name} {
+          background: $value;
+        }
       }
     }
   }
