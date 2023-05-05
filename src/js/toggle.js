@@ -2,9 +2,10 @@ import {colors, getColor} from './app.js'
 
 let toggle = document.querySelector('.toggle-switch>input');
 
+setTheme();
+toggle.addEventListener('click', setTheme)
 
-toggle.addEventListener('click', ()=>{
-
+function setTheme(){
     if (toggle.checked) {
         document.querySelector('body').style.backgroundColor = '#434582';
         document.querySelector('.toggle-switch').style.backgroundPosition = "5% 100%";
@@ -23,10 +24,9 @@ toggle.addEventListener('click', ()=>{
         document.querySelector('.list').classList.remove('list_dark-mode');
         document.querySelector('.pop-up').classList.remove('pop-up_dark-mode');
 
-
         chengeColorTheme (colors.dark, colors.light);
     }
-})
+}
 
 function chengeColorTheme (oldTheme, newTheme){
     let items = document.querySelectorAll('.drag-item');
