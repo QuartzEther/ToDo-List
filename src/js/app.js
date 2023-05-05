@@ -37,6 +37,8 @@ for (let item of document.querySelectorAll('.drag-item')){
     dragItem(item);
     //item.addEventListener('dblclick', (e)=>{item.style.backgroundColor = 'red'})
 }
+calendarInit(document.querySelector('.pop-up__calendar'), true);
+
 
 
 //-----------------ADD NEW ITEM----------------
@@ -286,14 +288,14 @@ function popUp(item){
     let btnOk = popUp.querySelector('.pop-btn_ok');
     let btnDel = popUp.querySelector('.pop-btn_del');
 
-    //заполнение исходя из item
 
+    //заполнение исходя из item
     //text
     popUp.querySelector('.form > input').value = item.querySelector('.text').innerHTML;
 
     //calendar
-    calendarInit(popUp.querySelector('.calendar'), true);
-    dateToInner(popUp.querySelector('.calendar'), item.querySelector('.calendar > input'), true)
+    dateToInner(popUp.querySelector('.calendar'), item.querySelector('.calendar > input'), true);
+
 
 
     btnOk.addEventListener('click', changeItem);
@@ -303,7 +305,8 @@ function popUp(item){
         //text
         item.querySelector('.text').innerHTML = popUp.querySelector('.form > input').value;
         //calendar
-        dateToInner(item.querySelector('.calendar'), popUp.querySelector('.calendar > input'))
+        dateToInner(item.querySelector('.calendar'), popUp.querySelector('.calendar > input'));
+
 
         closePopUp()
     }

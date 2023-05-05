@@ -14,6 +14,10 @@ function calendarInit(calendar, noSize = false){
 }
 
 function dateToInner(calendar, input, noSize = false){
+    if (calendar.querySelector('input').value != input.value){
+        calendar.querySelector('input').value = input.value;
+    }
+
     if (input.value){
         input.style.cursor = 'auto'
         calendar.querySelector('.calendar__text').style.visibility = 'inherit';
