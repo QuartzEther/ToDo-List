@@ -513,7 +513,7 @@ p {
   font-family: "Roboto";
   font-weight: 400;
   font-size: 2rem;
-  padding: 0.7rem 1.6rem;
+  padding: 0.9rem 1.6rem;
   width: 100%;
   transition: 0.3s border-color; }
   .input:focus, .input:hover {
@@ -769,13 +769,13 @@ input:checked ~ .round-button {
     background: transparent; }
   .calendar__img {
     width: 2rem;
-    height: 2rem;
+    height: 2.2rem;
     background: url("../img/calendar_lite.png") center/contain no-repeat;
     opacity: 0.6;
     margin-right: 0.5rem; }
   .calendar_big > .calendar__img {
     width: 2.4rem;
-    height: 2.4rem; }
+    height: 2.6rem; }
   .calendar_big > .calendar__text {
     font-size: 1.5rem; }
   .calendar:hover {
@@ -916,6 +916,7 @@ input:checked ~ .round-button {
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center; }
