@@ -291,7 +291,10 @@ function popUp(item){
 
     //заполнение исходя из item
     //text
-    popUp.querySelector('.form > input').value = item.querySelector('.text').innerHTML;
+    //popUp.querySelector('.form > input').value = item.querySelector('.text').innerHTML;
+
+    popUp.querySelector('.form > input').value = item.querySelector('.text> strike') ?
+        item.querySelector('.text> strike').innerHTML : item.querySelector('.text').innerHTML;
 
     //calendar
     dateToInner(popUp.querySelector('.calendar'), item.querySelector('.calendar > input'), true);
@@ -303,7 +306,11 @@ function popUp(item){
 
     function changeItem() {
         //text
-        item.querySelector('.text').innerHTML = popUp.querySelector('.form > input').value;
+        if (item.querySelector('.text> strike')){
+            item.querySelector('.text> strike').innerHTML =  popUp.querySelector('.form > input').value;
+        } else {
+            item.querySelector('.text').innerHTML = popUp.querySelector('.form > input').value;
+        }
         //calendar
         dateToInner(item.querySelector('.calendar'), popUp.querySelector('.calendar > input'));
 
