@@ -48,19 +48,29 @@ $shadow-small: drop-shadow(.1rem .2rem .2rem rgba(0, 0, 0, 0.4))
     -webkit-tap-highlight-color: transparent
 
 html
-    font-size: 72.5%
+    font-size: 70%
+    @media (max-width: 400px)
+        font-size: 60%
+
 
 body
     background-color: $color-bg-light
-
     color: $color-black
     padding-top: 10rem
+
+    @media (max-width: 767px)
+        padding: 0
 
 .container
     max-width: 120rem
     margin: 0 auto
     display: flex
     justify-content: space-around
+    @media (max-width: 767px)
+        min-height: 91.5vh
+        align-items: center
+
+
 
 
 

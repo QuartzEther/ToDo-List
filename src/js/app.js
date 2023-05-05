@@ -12,7 +12,7 @@ const addBtn = document.querySelector('.header__btn');
 
 //--------------------------------------
 
-itemList.push(new Item('text1'));
+itemList.push(new Item('text1text1text1text1text1text1text1text1text1'));
 itemList.push(new Item('text2'));
 itemList.push(new Item('text3', true));
 

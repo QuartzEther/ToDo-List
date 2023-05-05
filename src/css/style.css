@@ -365,18 +365,28 @@ table {
   -webkit-tap-highlight-color: transparent; }
 
 html {
-  font-size: 72.5%; }
+  font-size: 70%; }
+  @media (max-width: 400px) {
+    html {
+      font-size: 60%; } }
 
 body {
   background-color: #F2F8FB;
   color: #000000;
   padding-top: 10rem; }
+  @media (max-width: 767px) {
+    body {
+      padding: 0; } }
 
 .container {
   max-width: 120rem;
   margin: 0 auto;
   display: flex;
   justify-content: space-around; }
+  @media (max-width: 767px) {
+    .container {
+      min-height: 91.5vh;
+      align-items: center; } }
 
 @font-face {
   font-family: "Roboto";
@@ -448,7 +458,13 @@ p {
   padding: 2.5rem 0 2rem 0;
   border-radius: 2rem;
   background-color: #ffffff;
-  filter: drop-shadow(0.2rem 0.4rem 0.4rem rgba(0, 0, 0, 0.25)); }
+  box-shadow: 0.2rem 0.4rem 0.6rem rgba(0, 0, 0, 0.25); }
+  @media (max-width: 767px) {
+    .list {
+      margin: 1.5vh; } }
+  @media (max-width: 500px) {
+    .list {
+      width: 95vw; } }
   .list_dark-mode {
     background-color: #31315c; }
     .list_dark-mode * {
@@ -700,6 +716,24 @@ input:checked ~ .round-button {
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 0.5rem 0; }
+    @media (max-width: 470px) {
+      .item__text {
+        max-width: 18rem; } }
+    @media (max-width: 440px) {
+      .item__text {
+        max-width: 16rem; } }
+    @media (max-width: 410px) {
+      .item__text {
+        max-width: 15rem; } }
+    @media (max-width: 410px) {
+      .item__text {
+        max-width: 18rem; } }
+    @media (max-width: 380px) {
+      .item__text {
+        max-width: 15rem; } }
+    @media (max-width: 340px) {
+      .item__text {
+        max-width: 14rem; } }
 
 .list_dark-mode > .block > .item {
   background-color: #46466D; }
@@ -739,6 +773,11 @@ input:checked ~ .round-button {
     background: url("../img/calendar_lite.png") center/contain no-repeat;
     opacity: 0.6;
     margin-right: 0.5rem; }
+  .calendar_big > .calendar__img {
+    width: 2.4rem;
+    height: 2.4rem; }
+  .calendar_big > .calendar__text {
+    font-size: 1.5rem; }
   .calendar:hover {
     opacity: 0.9; }
 
@@ -793,8 +832,7 @@ input:checked ~ .round-button {
 .color-bar > label {
   display: inline-block;
   width: 2rem;
-  height: 2rem;
-  cursor: pointer; }
+  height: 2rem; }
   .color-bar > label:not(:last-child) {
     margin-right: 1rem; }
   .color-bar > label:hover span {
@@ -891,6 +929,9 @@ input:checked ~ .round-button {
     flex-direction: column;
     justify-content: center;
     align-items: center; }
+    @media (max-width: 500px) {
+      .pop-up__menu {
+        width: 90vw; } }
   .pop-up__form {
     margin-bottom: 2rem;
     width: 90%; }
@@ -899,7 +940,6 @@ input:checked ~ .round-button {
     margin-bottom: 1rem; }
   .pop-up__calendar {
     margin-bottom: 1.7rem;
-    transform: scale(1.15);
     opacity: 0.7;
     justify-content: center; }
   .pop-up__buttons {

@@ -63,8 +63,6 @@ function dateToInner(calendar, input, noSize = false){
             calendar.querySelector('.calendar__img').style.marginRight = '0';
         }
 
-        input.style.cursor = 'pointer';
-
         calendar.querySelector('.calendar__text').style.visibility = 'hidden';
         //calendar.querySelector('.calendar__img').style.visibility = 'hidden';
     }
