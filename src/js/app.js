@@ -33,6 +33,10 @@ for (let item of itemList){
 //calendar, checkbox and drug&drop init
 for (let item of document.querySelectorAll('.drag-item')){
     calendarInit(item.querySelector('.calendar'));
+    item.querySelector('.calendar> input').addEventListener('change', ()=>{
+        changeItemList(item, 'date', item.querySelector('.calendar > input').value)
+    })
+
     item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
     dragItem(item);
 }
@@ -45,12 +49,17 @@ addBtn.addEventListener('click', ()=>{
     if (input.value){
         itemList.push(new Item(input.value));
 
-
         todoBlock.insertAdjacentHTML("beforeend", itemList[itemList.length-1].createHTML(itemList.length-1));
 
         let item = todoBlock.querySelectorAll('.item')[todoBlock.querySelectorAll('.item').length - 1]
 
         calendarInit(item.querySelector('.calendar'));
+
+        item.querySelector('.calendar> input').addEventListener('change', ()=>{
+            changeItemList(item, 'date', item.querySelector('.calendar > input').value)
+        })
+
+
         item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
 
         dragItem(item)
@@ -73,11 +82,14 @@ function checkboxTouch(e){
             item.querySelector('.text').innerHTML = `<strike>${item.querySelector('.text').innerHTML}</strike>`
 
             completeBlock.appendChild(item)
+
+            changeItemList(item, 'isComplete', true);
         } else {
             item.classList.replace('item_complete','item_todo')
             item.querySelector('.text').innerHTML = item.querySelector('.text > strike').innerHTML;
 
             todoBlock.appendChild(item)
+            changeItemList(item, 'isComplete', false);
         }
     }
 }
@@ -228,6 +240,8 @@ function dragItem(item){
             item.style.top = 0;
             margin = item.getBoundingClientRect().y;
 
+            changeItemList(item, 'isComplete', true);
+
         } else if (prevContainer
             && item.getBoundingClientRect().y < prevContainer.getBoundingClientRect().bottom){ //в верхний контейнер
 
@@ -246,6 +260,8 @@ function dragItem(item){
 
             item.style.top = 0;
             margin = item.getBoundingClientRect().y;
+
+            changeItemList(item, 'isComplete', false);
         }
 
         if (container.classList.contains('block_complete')
@@ -278,7 +294,6 @@ function dragItem(item){
     }
 }
 
-//pop-up
 
 //colors
 export let colors = {
@@ -302,7 +317,7 @@ export let colors = {
     }
 }
 
-
+//pop-up
 function popUp(item){
     //init
     let popUp = document.querySelector('.pop-up');
@@ -404,10 +419,36 @@ function changeItemList(item, key, newValue){
     for (let i of itemList){
         if (i.id == id) tempItem = i;
     }
-
     if (tempItem){
         tempItem[key] = newValue;
     }
 
-    console.log(itemList);
+    //console.log(itemList);
+
+    saveToLocalStorage();
+}
+
+function saveToLocalStorage(){
+    let dataToStorage = [];
+    let items = document.querySelectorAll('.item');
+
+    for (let item of items){
+        dataToStorage.push({});
+
+        let dataItem = dataToStorage[dataToStorage.length-1];
+        let thisItem = null;
+
+        for (thisItem of itemList){
+            if (item.id == thisItem.id) break;
+        }
+
+        dataItem.id = dataToStorage.length-1;
+        dataItem.text = thisItem.text;
+        dataItem.isComplete = thisItem.isComplete;
+        dataItem.date = thisItem.date;
+        dataItem.color = thisItem.color;
+    }
+
+
+    console.log(dataToStorage);
 }
