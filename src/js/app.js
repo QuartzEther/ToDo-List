@@ -35,6 +35,7 @@ for (let item of document.querySelectorAll('.drag-item')){
     calendarInit(item.querySelector('.calendar'));
     item.querySelector('.calendar> input').addEventListener('change', ()=>{
         changeItemList(item, 'date', item.querySelector('.calendar > input').value)
+        saveToLocalStorage();
     })
 
     item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
@@ -57,6 +58,7 @@ addBtn.addEventListener('click', ()=>{
 
         item.querySelector('.calendar> input').addEventListener('change', ()=>{
             changeItemList(item, 'date', item.querySelector('.calendar > input').value)
+            saveToLocalStorage();
         })
 
 
@@ -65,6 +67,8 @@ addBtn.addEventListener('click', ()=>{
         dragItem(item)
 
         input.value = '';
+        saveToLocalStorage();
+
     }
 
 })
@@ -91,6 +95,8 @@ function checkboxTouch(e){
             todoBlock.appendChild(item)
             changeItemList(item, 'isComplete', false);
         }
+
+        saveToLocalStorage();
     }
 }
 
@@ -205,6 +211,7 @@ function dragItem(item){
             item.style.top = 0;
             margin = item.getBoundingClientRect().y;
 
+            saveToLocalStorage();
 
         } else if (prevEl && item.getBoundingClientRect().y < prevEl.getBoundingClientRect().y
             && !prevEl.classList.contains('block__tittle')
@@ -218,6 +225,8 @@ function dragItem(item){
 
             item.style.top = 0;
             margin = item.getBoundingClientRect().y;
+
+            saveToLocalStorage();
 
         } else if (nextContainer
             && (item.getBoundingClientRect().bottom) > nextContainer.querySelector('.block__tittle').getBoundingClientRect().bottom + 10){ //в нижний контейнер
@@ -242,6 +251,8 @@ function dragItem(item){
 
             changeItemList(item, 'isComplete', true);
 
+            saveToLocalStorage();
+
         } else if (prevContainer
             && item.getBoundingClientRect().y < prevContainer.getBoundingClientRect().bottom){ //в верхний контейнер
 
@@ -262,8 +273,11 @@ function dragItem(item){
             margin = item.getBoundingClientRect().y;
 
             changeItemList(item, 'isComplete', false);
+
+            saveToLocalStorage();
         }
 
+        //переключатель
         if (container.classList.contains('block_complete')
             && !item.classList.contains('item_complete')){
 
@@ -389,6 +403,8 @@ function popUp(item){
 
         btnOk.removeEventListener('click', changeItem);
         btnDel.removeEventListener('click', deleteItem);
+
+        saveToLocalStorage();
     }
 }
 
@@ -422,10 +438,6 @@ function changeItemList(item, key, newValue){
     if (tempItem){
         tempItem[key] = newValue;
     }
-
-    //console.log(itemList);
-
-    saveToLocalStorage();
 }
 
 function saveToLocalStorage(){
