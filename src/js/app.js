@@ -2,6 +2,7 @@ import {calendarInit, dateToInner} from './classes/calendar.js'
 import {Item} from './classes/item.js'
 
 //-----------------INIT----------------
+let data = localStorage.items ? JSON.parse(localStorage.items) : [];
 
 let itemList = [];
 
@@ -10,24 +11,19 @@ const completeBlock = document.querySelector('.block_complete');
 
 const addBtn = document.querySelector('.header__btn');
 
-//--------------------------------------
+//---------Заполнение данных из LocalStorage
+console.log(data);
 
-itemList.push(new Item('text1'));
-itemList.push(new Item('text2'));
-itemList.push(new Item('text3', true));
+for (let item of data){
+    itemList.push(new Item(item.text, item.isComplete, item.date, item.color));
 
-//create html text
-for (let id in itemList){
-    itemList[id].createHTML(id);
-}
+    //create html text
+    let el = itemList.at(-1);
+    el.createHTML(item.id.toString())
 
-//add items in DOM
-for (let item of itemList){
-    if (item.isComplete){
-        completeBlock.insertAdjacentHTML("beforeend", item.itemHtml);
-    } else {
-        todoBlock.insertAdjacentHTML("beforeend", item.itemHtml);
-    }
+    //add items in DOM
+    el.isComplete ? completeBlock.insertAdjacentHTML("beforeend", el.itemHtml)
+        : todoBlock.insertAdjacentHTML("beforeend", el.itemHtml);
 }
 
 //calendar, checkbox and drug&drop init
@@ -461,6 +457,5 @@ function saveToLocalStorage(){
         dataItem.color = thisItem.color;
     }
 
-
-    console.log(dataToStorage);
+    localStorage.setItem('items', JSON.stringify(dataToStorage))
 }

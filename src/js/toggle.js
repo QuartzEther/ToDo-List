@@ -2,7 +2,12 @@ import {colors, getColor} from './app.js'
 
 let toggle = document.querySelector('.toggle-switch>input');
 
+if (localStorage.theme){
+    toggle.checked = (localStorage.theme == 'dark')? true : false;
+}
+
 setTheme();
+
 toggle.addEventListener('click', setTheme)
 
 function setTheme(){
@@ -15,6 +20,7 @@ function setTheme(){
         document.querySelector('.pop-up').classList.add('pop-up_dark-mode');
 
         chengeColorTheme (colors.light, colors.dark);
+        localStorage.setItem('theme', 'dark');
     } else {
         document.querySelector('body').style.backgroundColor = '#F2F8FB';
 
@@ -25,9 +31,11 @@ function setTheme(){
         document.querySelector('.pop-up').classList.remove('pop-up_dark-mode');
 
         chengeColorTheme (colors.dark, colors.light);
+        localStorage.setItem('theme', 'light');
     }
 }
 
+//изменение цвета item'ов
 function chengeColorTheme (oldTheme, newTheme){
     let items = document.querySelectorAll('.drag-item');
 
