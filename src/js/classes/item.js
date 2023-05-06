@@ -17,7 +17,7 @@ export class Item {
     }
 
     createHTML(numId = null){
-        if (!this.id) this.id = numId;
+        if (!this.id) this.id = numId.toString();
         if (this.id){
             this.#itemHTML = `<div class="block__item item ${this.isComplete ? 'item_complete' : 'item_todo'} drag-item" id="${this.id}">
                 <div class="item__check-text">

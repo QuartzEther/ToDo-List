@@ -11,6 +11,30 @@ const completeBlock = document.querySelector('.block_complete');
 
 const addBtn = document.querySelector('.header__btn');
 
+//colors
+export let colors = {
+    light : {
+        red: '#f22a2a',
+        orange: '#f2711c',
+        yellow: '#fbbd08',
+        green: '#B5CC18',
+        blue: '#00bcd4',
+        violet: '#cd5dde',
+        base: '#ffffff'
+    },
+    dark : {
+        red: '#ae1616',
+        orange: '#e17014',
+        yellow: '#dea90a',
+        green: '#539412',
+        blue: '#2a3d9c',
+        violet: '#6435C9',
+        base: '#46466d'
+    }
+}
+
+let colorTheme = document.querySelector('.list').classList.contains('list_dark-mode') ? colors.dark : colors.light;
+
 //---------Заполнение данных из LocalStorage
 console.log(data);
 
@@ -19,23 +43,39 @@ for (let item of data){
 
     //create html text
     let el = itemList.at(-1);
-    el.createHTML(item.id.toString())
+    el.createHTML(item.id)
 
     //add items in DOM
     el.isComplete ? completeBlock.insertAdjacentHTML("beforeend", el.itemHtml)
         : todoBlock.insertAdjacentHTML("beforeend", el.itemHtml);
 }
 
-//calendar, checkbox and drug&drop init
+//calendar, checkbox, drug&drop and color init
 for (let item of document.querySelectorAll('.drag-item')){
+    let el = itemList[item.id];
+
+    //checkbox
+    item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
+
+    //date
+    item.querySelector('.calendar > input').value = el.date;
+
     calendarInit(item.querySelector('.calendar'));
     item.querySelector('.calendar> input').addEventListener('change', ()=>{
         changeItemList(item, 'date', item.querySelector('.calendar > input').value)
         saveToLocalStorage();
     })
 
-    item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
+    //color
+    for (let color of Object.entries(colorTheme)){
+        if (el.color == color[0]) {
+            item.style.backgroundColor = color[1];
+        }
+    }
+
+    //drag&drop
     dragItem(item);
+
 }
 
 //-----------------ADD NEW ITEM----------------
@@ -304,29 +344,6 @@ function dragItem(item){
     }
 }
 
-
-//colors
-export let colors = {
-    light : {
-        red: '#f22a2a',
-        orange: '#f2711c',
-        yellow: '#fbbd08',
-        green: '#B5CC18',
-        blue: '#00bcd4',
-        violet: '#cd5dde',
-        base: '#ffffff'
-    },
-    dark : {
-        red: '#ae1616',
-        orange: '#e17014',
-        yellow: '#dea90a',
-        green: '#539412',
-        blue: '#2a3d9c',
-        violet: '#6435C9',
-        base: '#46466d'
-    }
-}
-
 //pop-up
 function popUp(item){
     //init
@@ -339,8 +356,8 @@ function popUp(item){
     calendarInit(document.querySelector('.pop-up__calendar'), true);
 
     let colorBar = popUp.querySelectorAll('.color-bar > input');
-    let colorTheme = document.querySelector('.list').classList.contains('list_dark-mode') ? colors.dark : colors.light;
     let itemColor = getColor(item).toLowerCase();
+    colorTheme = document.querySelector('.list').classList.contains('list_dark-mode') ? colors.dark : colors.light;
 
     //заполнение исходя из item
     //text
