@@ -1,10 +1,11 @@
 export class Item {
     #itemHTML = '';
-    #id = null;
+    id = null;
 
-    constructor(text = '', isComplete = false, date = '') {
+    constructor(text = '', isComplete = false, date = '', color = 'base') {
         this.text = text;
         this.date = date;
+        this.color = color;
         this.isComplete = isComplete;
     }
 
@@ -16,13 +17,13 @@ export class Item {
     }
 
     createHTML(numId = null){
-        if (!this.#id) this.#id = numId;
-        if (this.#id){
-            this.#itemHTML = `<div class="block__item item ${this.isComplete ? 'item_complete' : 'item_todo'} drag-item">
+        if (!this.id) this.id = numId;
+        if (this.id){
+            this.#itemHTML = `<div class="block__item item ${this.isComplete ? 'item_complete' : 'item_todo'} drag-item" id="${this.id}">
                 <div class="item__check-text">
                     <div class="item__checkbox checkbox">
-                        <input type="checkbox" ${this.isComplete ? 'checked' : ''} id="checkbox_${this.#id}" />
-                        <label for="checkbox_${this.#id}"></label>
+                        <input type="checkbox" ${this.isComplete ? 'checked' : ''} id="checkbox_${this.id}" />
+                        <label for="checkbox_${this.id}"></label>
                     </div>
                     <p class="item__text text">${this.isComplete ? `<strike>${this.text}</strike>` : this.text}</p>
                 </div>

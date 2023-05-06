@@ -12,33 +12,30 @@ const addBtn = document.querySelector('.header__btn');
 
 //--------------------------------------
 
-// itemList.push(new Item('text1'));
-// itemList.push(new Item('text2'));
-// itemList.push(new Item('text3', true));
-//
-// //create html text
-// for (let id in itemList){
-//     itemList[id].createHTML(id);
-// }
-//
-// //add items in DOM
-// for (let item of itemList){
-//     if (item.isComplete){
-//         completeBlock.insertAdjacentHTML("beforeend", item.itemHtml);
-//     } else {
-//         todoBlock.insertAdjacentHTML("beforeend", item.itemHtml);
-//     }
-// }
+itemList.push(new Item('text1'));
+itemList.push(new Item('text2'));
+itemList.push(new Item('text3', true));
 
-// //calendar, checkbox and drug&drop init
-// for (let item of document.querySelectorAll('.drag-item')){
-//     calendarInit(item.querySelector('.calendar'));
-//     item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
-//     dragItem(item);
-//     //item.addEventListener('dblclick', (e)=>{item.style.backgroundColor = 'red'})
-// }
+//create html text
+for (let id in itemList){
+    itemList[id].createHTML(id);
+}
 
+//add items in DOM
+for (let item of itemList){
+    if (item.isComplete){
+        completeBlock.insertAdjacentHTML("beforeend", item.itemHtml);
+    } else {
+        todoBlock.insertAdjacentHTML("beforeend", item.itemHtml);
+    }
+}
 
+//calendar, checkbox and drug&drop init
+for (let item of document.querySelectorAll('.drag-item')){
+    calendarInit(item.querySelector('.calendar'));
+    item.querySelector('.checkbox').addEventListener('click', checkboxTouch)
+    dragItem(item);
+}
 
 //-----------------ADD NEW ITEM----------------
 
@@ -48,7 +45,8 @@ addBtn.addEventListener('click', ()=>{
     if (input.value){
         itemList.push(new Item(input.value));
 
-        todoBlock.insertAdjacentHTML("beforeend", itemList[itemList.length-1].createHTML(itemList.length));
+
+        todoBlock.insertAdjacentHTML("beforeend", itemList[itemList.length-1].createHTML(itemList.length-1));
 
         let item = todoBlock.querySelectorAll('.item')[todoBlock.querySelectorAll('.item').length - 1]
 
@@ -59,6 +57,7 @@ addBtn.addEventListener('click', ()=>{
 
         input.value = '';
     }
+
 })
 //----------------Moving Items-------------------
 
@@ -341,25 +340,30 @@ function popUp(item){
 
     function changeItem() {
         //text
+        let text = popUp.querySelector('.form > input').value;
         if (item.querySelector('.text> strike')){
-            item.querySelector('.text> strike').innerHTML =  popUp.querySelector('.form > input').value;
+            item.querySelector('.text> strike').innerHTML = text;
         } else {
-            item.querySelector('.text').innerHTML = popUp.querySelector('.form > input').value;
+            item.querySelector('.text').innerHTML = text;
         }
+        changeItemList(item, 'text', text);
+
         //calendar
         dateToInner(item.querySelector('.calendar'), popUp.querySelector('.calendar > input'));
+        changeItemList(item, 'date', popUp.querySelector('.calendar > input').value);
 
         //color
         for (let colorItem of colorBar){
             if (colorItem.checked){
-                item.style.backgroundColor = colorTheme[colorItem.id]
-
+                item.style.backgroundColor = colorTheme[colorItem.id];
+                changeItemList(item, 'color', colorItem.id);
             }
         }
         closePopUp()
     }
 
     function deleteItem() {
+        changeItemList(item, 'text', '');
         item.remove();
 
         closePopUp()
@@ -390,4 +394,20 @@ export function getColor(tag) {
 
     let style = window.getComputedStyle(tag);
     return toHex(style.backgroundColor);
+}
+
+
+function changeItemList(item, key, newValue){
+    let id = item.id;
+    let tempItem = null;
+
+    for (let i of itemList){
+        if (i.id == id) tempItem = i;
+    }
+
+    if (tempItem){
+        tempItem[key] = newValue;
+    }
+
+    console.log(itemList);
 }
