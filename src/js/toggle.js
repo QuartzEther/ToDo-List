@@ -11,6 +11,7 @@ setTheme();
 toggle.addEventListener('click', setTheme)
 
 function setTheme(){
+    document.querySelector('.list').style.transition = '0s';
     if (toggle.checked) {
         document.querySelector('body').style.backgroundColor = '#434582';
         document.querySelector('.toggle-switch').style.backgroundPosition = "5% 100%";

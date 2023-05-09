@@ -2,6 +2,12 @@ import {calendarInit, dateToInner} from './classes/calendar.js'
 import {Item} from './classes/item.js'
 
 //-----------------INIT----------------
+setTimeout(()=>{
+    let list = document.querySelector('.list');
+    list.style.transition = '1s ease';
+    list.style.opacity = 1;
+},1000)
+
 let data = localStorage.items ? JSON.parse(localStorage.items) : [];
 
 let itemList = [];
