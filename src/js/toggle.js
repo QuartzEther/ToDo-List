@@ -19,6 +19,8 @@ function setTheme(){
 
         document.querySelector('.list').classList.add('list_dark-mode');
         document.querySelector('.pop-up').classList.add('pop-up_dark-mode');
+        document.querySelector('.copyright').classList.add('copyright_dark');
+
 
         chengeColorTheme (colors.light, colors.dark);
         localStorage.setItem('theme', 'dark');
@@ -30,6 +32,7 @@ function setTheme(){
 
         document.querySelector('.list').classList.remove('list_dark-mode');
         document.querySelector('.pop-up').classList.remove('pop-up_dark-mode');
+        document.querySelector('.copyright').classList.remove('copyright_dark');
 
         chengeColorTheme (colors.dark, colors.light);
         localStorage.setItem('theme', 'light');
