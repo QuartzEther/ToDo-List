@@ -367,7 +367,7 @@ function popUp(item){
 
     //заполнение исходя из item
     //text
-    popUp.querySelector('.form > input').value = item.querySelector('.text> strike') ?
+    popUp.querySelector('.form > textarea').value = item.querySelector('.text> strike') ?
         item.querySelector('.text> strike').innerHTML : item.querySelector('.text').innerHTML;
 
     //calendar
@@ -388,7 +388,11 @@ function popUp(item){
 
     function changeItem() {
         //text
-        let text = popUp.querySelector('.form > input').value;
+        let text = popUp.querySelector('.form > textarea').value;
+        if (!text){
+            deleteItem();
+            return;
+        }
         if (item.querySelector('.text> strike')){
             item.querySelector('.text> strike').innerHTML = text;
         } else {
