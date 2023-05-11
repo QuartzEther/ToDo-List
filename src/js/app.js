@@ -124,15 +124,16 @@ function checkboxTouch(e){
         let item = e.target.parentNode.parentNode.parentElement;
 
         if (checkbox.checked){
-            item.classList.replace('item_todo', 'item_complete')
-            item.querySelector('.text').innerHTML = `<strike>${item.querySelector('.text').innerHTML}</strike>`;
+            item.classList.replace('item_todo', 'item_complete');
+            item.querySelector('.text').classList.add('text-line');
 
             completeBlock.appendChild(item)
 
             changeItemList(item, 'isComplete', true);
         } else {
             item.classList.replace('item_complete','item_todo')
-            item.querySelector('.text').innerHTML = item.querySelector('.text > strike').innerHTML;
+            item.querySelector('.text').classList.remove('text-line');
+
 
 
             todoBlock.appendChild(item)
@@ -296,10 +297,7 @@ function dragItem(item){
 
             item.querySelector('.checkbox > input').checked = true;
             item.classList.replace('item_todo', 'item_complete');
-
-            if (!item.querySelector('.text > strike')){
-                item.querySelector('.text').innerHTML = `<strike>${item.querySelector('.text').innerHTML}</strike>`;
-            }
+            item.querySelector('.text').classList.add('text-line');
 
             changeItemList(item, 'isComplete', true);
 
@@ -326,6 +324,8 @@ function dragItem(item){
 
             item.querySelector('.checkbox > input').checked = false;
             item.classList.replace('item_complete', 'item_todo');
+            item.querySelector('.text').classList.remove('text-line');
+
 
             changeItemList(item, 'isComplete', false);
             saveToLocalStorage();
@@ -342,10 +342,6 @@ function dragItem(item){
         item.style.top = 0;
 
         item.style.zIndex = '1';
-
-        if (item.querySelector('.text > strike') && item.classList.contains('item_todo')){
-            item.querySelector('.text').innerHTML = item.querySelector('.text > strike').innerHTML;
-        }
     }
 }
 
@@ -366,8 +362,7 @@ function popUp(item){
 
     //заполнение исходя из item
     //text
-    popUp.querySelector('.form > textarea').value = item.querySelector('.text> strike') ?
-        item.querySelector('.text> strike').innerHTML : item.querySelector('.text').innerHTML;
+    popUp.querySelector('.form > textarea').value = item.querySelector('.text').innerHTML;
 
     //calendar
     dateToInner(popUp.querySelector('.calendar'), item.querySelector('.calendar > input'), true);
@@ -392,11 +387,9 @@ function popUp(item){
             deleteItem();
             return;
         }
-        if (item.querySelector('.text> strike')){
-            item.querySelector('.text> strike').innerHTML = text;
-        } else {
-            item.querySelector('.text').innerHTML = text;
-        }
+
+        item.querySelector('.text').innerHTML = text;
+
         changeItemList(item, 'text', text);
 
         //calendar

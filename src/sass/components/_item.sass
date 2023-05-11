@@ -32,10 +32,25 @@
 
 
   &__text
+    position: relative
     white-space: nowrap /* Запрещаем перенос строк */
     overflow: hidden
     text-overflow: ellipsis
     padding: .5rem 0 .5rem .8rem
+
+
+.text-line
+  &::after
+    content: ""
+    position: absolute
+    transform: translateY(-50%)
+    right: 0
+    top: 52%
+    display: block
+    width: calc(100% - .8rem)
+    height: 2px
+    background-color: $color-text-bright
+
 
 
 
