@@ -125,7 +125,7 @@ function checkboxTouch(e){
 
         if (checkbox.checked){
             item.classList.replace('item_todo', 'item_complete')
-            item.querySelector('.text').innerHTML = `<strike>${item.querySelector('.text').innerHTML}</strike>`
+            item.querySelector('.text').innerHTML = `<strike>${item.querySelector('.text').innerHTML}</strike>`;
 
             completeBlock.appendChild(item)
 
@@ -134,11 +134,13 @@ function checkboxTouch(e){
             item.classList.replace('item_complete','item_todo')
             item.querySelector('.text').innerHTML = item.querySelector('.text > strike').innerHTML;
 
+
             todoBlock.appendChild(item)
             changeItemList(item, 'isComplete', false);
         }
 
         saveToLocalStorage();
+
     }
 }
 
@@ -194,7 +196,7 @@ function dragItem(item){
         }
 
         //отключение прокрутки страницы
-        event.preventDefault();
+        if (event.cancelable) event.preventDefault();
 
         //--------Double click/tap
         click2 = Date.now();
@@ -218,6 +220,7 @@ function dragItem(item){
 
             document.addEventListener('touchmove', touchMove, {passive: false});
             document.addEventListener('touchend', touchEnd);
+            document.addEventListener('touchcancel', touchEnd);
         } else {
             item.style.top = event.clientY - margin - item.offsetHeight / 2 + 'px';
 
@@ -228,7 +231,7 @@ function dragItem(item){
 
 
     function touchMove(event) {
-        event.preventDefault();
+        if (event.cancelable) event.preventDefault();
 
         let touch = event.targetTouches? event.targetTouches[0]:event;
         item.style.top = touch.clientY - margin - item.offsetHeight / 2 + 'px';
@@ -291,6 +294,13 @@ function dragItem(item){
             item.style.top = 0;
             margin = item.getBoundingClientRect().y;
 
+            item.querySelector('.checkbox > input').checked = true;
+            item.classList.replace('item_todo', 'item_complete');
+
+            if (!item.querySelector('.text > strike')){
+                item.querySelector('.text').innerHTML = `<strike>${item.querySelector('.text').innerHTML}</strike>`;
+            }
+
             changeItemList(item, 'isComplete', true);
 
             saveToLocalStorage();
@@ -314,28 +324,13 @@ function dragItem(item){
             item.style.top = 0;
             margin = item.getBoundingClientRect().y;
 
-            changeItemList(item, 'isComplete', false);
+            item.querySelector('.checkbox > input').checked = false;
+            item.classList.replace('item_complete', 'item_todo');
 
+            changeItemList(item, 'isComplete', false);
             saveToLocalStorage();
         }
 
-        //переключатель
-        if (container.classList.contains('block_complete')
-            && !item.classList.contains('item_complete')){
-
-            item.classList.replace('item_todo', 'item_complete');
-            item.querySelector('.text').innerHTML = `<strike>${item.querySelector('.text').innerHTML}</strike>`;
-
-            item.querySelector('.checkbox > input').checked = true;
-        }
-        else if (container.classList.contains('block_todo')
-            && !item.classList.contains('item_todo')){
-
-            item.classList.replace('item_complete','item_todo')
-            item.querySelector('.text').innerHTML = item.querySelector('.text > strike').innerHTML;
-
-            item.querySelector('.checkbox > input').checked = false;
-        }
     }
 
     function touchEnd (){
@@ -347,6 +342,10 @@ function dragItem(item){
         item.style.top = 0;
 
         item.style.zIndex = '1';
+
+        if (item.querySelector('.text > strike') && item.classList.contains('item_todo')){
+            item.querySelector('.text').innerHTML = item.querySelector('.text > strike').innerHTML;
+        }
     }
 }
 
